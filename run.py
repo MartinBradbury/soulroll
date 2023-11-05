@@ -10,7 +10,7 @@ import random
 import hashlib
 import maskpass
 #pip install maskpass
-from words import word_list
+#from words import word_list
 
 
 SCOPE = [
@@ -27,5 +27,25 @@ SHEET = GSPREAD_CLIENT.open('userdata')
 sales = SHEET.worksheet('user')
 
 data = sales.get_all_values()
-
 print(data)
+def username():
+    username = input("username: ")
+    return username.split()
+
+def update_username(user):
+    """
+    update username on the google sheet
+    """
+    print("Updating Username....\n")
+    upload_un = SHEET.worksheet('user')
+    upload_un.append_row(user)
+    print("Username accepted")
+
+
+def main():
+
+    user = username()
+    update_username(user)
+
+
+main()
