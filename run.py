@@ -28,9 +28,16 @@ sales = SHEET.worksheet('user')
 
 data = sales.get_all_values()
 print(data)
+
+
+
 def username():
     username = input("username: ")
     return username.split()
+
+def password():
+    password = input("password: ")
+    return password.split()
 
 def update_username(user):
     """
@@ -41,11 +48,19 @@ def update_username(user):
     upload_un.append_row(user)
     print("Username accepted")
 
+def update_password(pw):
+    print("updating password.....\n")
+    upload_pw = SHEET.worksheet('password')
+    upload_pw.append_row(pw)
+    print("password accepted")
+
+
 
 def main():
-
     user = username()
+    pw = password()
     update_username(user)
+    update_password(pw)
 
 
 main()
