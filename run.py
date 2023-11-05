@@ -6,6 +6,12 @@
 
 import gspread
 from google.oauth2.service_account import Credentials
+import random
+import hashlib
+import maskpass
+#pip install maskpass
+from words import word_list
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
