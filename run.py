@@ -34,7 +34,7 @@ def create_account():
     upload.append_row([username, password])
 
 
-
+def login():
     input_username = input("username")
     input_password = input("password")
 
@@ -70,8 +70,8 @@ def create_account():
 
 
 def main():
-    create_account()
-    #login()
+    #create_account()
+    login()
 
 
 main()
