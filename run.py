@@ -49,6 +49,7 @@ def welcome():
 
 def create_account():
     system('clear')
+    print(f.renderText('Create Account'))
     SHEET = GSPREAD_CLIENT.open('userdata')
     print("\nWelcome to account creation.\n")
     print("Please create a username between 3-10 characters and starts with any letter\n")
@@ -81,6 +82,7 @@ def create_account():
 
 def login():
     system('clear')
+    print(f.renderText('Login'))
     print("Welcome to Login")
     print("Please Login using your username and password\n")
     input_username = input("username")
@@ -101,10 +103,33 @@ def login():
         print("incorrect")
         login()
 
+def game_select():
+    system('clear')
+    print(f.renderText('Mini-Games'))
+    print("Which game would you like to play?\n")
+    print("[1] DeathRoll")
+    print("[2] World of Warcraft Trivia Quiz")
+    print("[3] Logout")
+    selection = input("What would you like to do?: ")
+    if selection == '1':
+        print("Lets DeathRoll")
+        #deathroll()
+    elif selection == '2':
+        print("Lets have a Quiz")
+        #quiz()
+    elif selection == '3':
+        print("Logged out!")
+        main()
+    else:
+        print("please select [1], [2], [3]")
+        game_select()
+
+
 
 
 def main():
     welcome()
+    game_select()
 
 
 user_selection = dict({
