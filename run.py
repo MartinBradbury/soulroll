@@ -32,35 +32,46 @@ SHEET = GSPREAD_CLIENT.open('userdata')
 def create_account():
     SHEET = GSPREAD_CLIENT.open('userdata')
     print("\nWelcome to account creation.\n")
-    username = input("Create a username: \n")
-    # if len(username) < 3:
-    #     print("Username should be between 3 and 10 characters")
-    #     create_account()
-    # else:   
-    #     print("Username accepted")
+    print("Please create a username between 3-10 characters and starts with any letter\n")
+    username = input("Create a username: ").lower()
+    if len(username) < 3:
+        print("Username should be between 3 and 10 characters")
+        create_account()
+    elif len(username) > 10:
+        print("Username should be between 3 and 10 characters")
+        create_account()
+    else:   
+        print("Username accepted")
 
-    password = input("Create a password: ")
-    # password_check = input("Reenter password ")
-    # if password == password_check:
-    #     print("\nAccount created successfully")
-    # else:
-    #     print("Passwords do not match")
-    #     create_account()
+    print("Please create a password starting with any letter")
+    password = maskpass.askpass("\nCreate a password: ")
+    password_check = maskpass.askpass("\nRe-enter password ")
+    if password == password_check:
+        print("\nAccount created successfully")
+        enc = password_check.encode()
+        hash1 = hashlib.md5(enc).hexdigest()
+    else:
+        print("Passwords do not match")
+        create_account()
 
 
     upload = SHEET.worksheet('username')
-    upload.append_row([username, password])
+    upload.append_row([username, hash1])
 
 
 def login():
+    print("Welcome to Login")
+    print("Please Login using your username and password\n")
     input_username = input("username")
-    input_password = input("password")
+    input_password = maskpass.askpass("\npassword")
+    auth = input_password.encode()
+    auth_hash = hashlib.md5(auth).hexdigest()
 
     data = SHEET.worksheet('username')
     usr = data.get_all_records()
     match = False
     for record in usr:
-        if record['username'] == input_username and record['password'] == input_password:
+        if record['username'] == input_username and record['password'] == auth_hash:
             match = True
             break
     if match:
@@ -77,6 +88,3 @@ def main():
 
 
 main()
-
-
-
