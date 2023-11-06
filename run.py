@@ -10,6 +10,8 @@ import random
 import hashlib
 import maskpass
 #pip install maskpass
+from os import system
+#to clear screen
 #from words import word_list
 
 
@@ -27,6 +29,7 @@ SHEET = GSPREAD_CLIENT.open('userdata')
 
 
 def welcome():
+    system('clear')
     print("Welcome")
     print("[1] Login")
     print("[2] create account")
@@ -35,10 +38,11 @@ def welcome():
     if selection in user_selection.keys():
         return user_selection[selection]()
     else:
-        intro()
+        welcome()
 
 
 def create_account():
+    system('clear')
     SHEET = GSPREAD_CLIENT.open('userdata')
     print("\nWelcome to account creation.\n")
     print("Please create a username between 3-10 characters and starts with any letter\n")
@@ -66,9 +70,11 @@ def create_account():
 
     upload = SHEET.worksheet('username')
     upload.append_row([username, hash1])
+    welcome()
 
 
 def login():
+    system('clear')
     print("Welcome to Login")
     print("Please Login using your username and password\n")
     input_username = input("username")
