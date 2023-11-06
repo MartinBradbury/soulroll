@@ -25,10 +25,28 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('userdata')
 
 
+
+
+
+
 def create_account():
     SHEET = GSPREAD_CLIENT.open('userdata')
-    username = input("username: ")
-    password = input("password: ")
+    print("\nWelcome to account creation.\n")
+    username = input("Create a username: \n")
+    # if len(username) < 3:
+    #     print("Username should be between 3 and 10 characters")
+    #     create_account()
+    # else:   
+    #     print("Username accepted")
+
+    password = input("Create a password: ")
+    # password_check = input("Reenter password ")
+    # if password == password_check:
+    #     print("\nAccount created successfully")
+    # else:
+    #     print("Passwords do not match")
+    #     create_account()
+
 
     upload = SHEET.worksheet('username')
     upload.append_row([username, password])
@@ -40,41 +58,25 @@ def login():
 
     data = SHEET.worksheet('username')
     usr = data.get_all_records()
-    #print(usr)
-    match_found = False
+    match = False
     for record in usr:
-        if record[''] == input_username and record[''] == input_password:
-            match_found = True
+        if record['username'] == input_username and record['password'] == input_password:
+            match = True
             break
-    if match_found:
+    if match:
         print("logged in")
     else:
         print("incorrect")
-# def login():
-#     username = input("Please enter your username: ")
-#     data = SHEET.worksheet('user')
-#     usr = data.get_all_values()
-#     print(usr)
-#     if username.lower() == str(usr):
-#         print("Correct credentials!")
-#         pwd = input("Please enter your password: ")
-#         data = SHEET.worksheet('password')
-#         pw = data.get_all_values()
-#         print(pw)
-#         if pwd == str(pw):
-#             print("correct details")
-        
-#     else:    
-#         print("Incorrect credentials.")
-#         main()
+        login()
+
 
 
 def main():
-    #create_account()
+    create_account()
     login()
 
 
 main()
-#login()
+
 
 
