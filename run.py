@@ -25,58 +25,40 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('userdata')
 
 
-def username():
+def create_account():
+    SHEET = GSPREAD_CLIENT.open('userdata')
     username = input("username: ")
-    return username.split()
-
-def password():
     password = input("password: ")
-    return password.split()
 
-def update_username(user):
-    """
-    update username on the google sheet
-    """
-    print("Updating Username....\n")
-    upload_un = SHEET.worksheet('user')
-    upload_un.append_row(user)
-    print("Username accepted")
-
-def update_password(pw):
-    print("updating password.....\n")
-    upload_pw = SHEET.worksheet('password')
-    upload_pw.append_row(pw)
-    print("password accepted")
+    upload = SHEET.worksheet('username')
+    upload.append_row([username, password])
 
 
 
-def login():
-    username = input("Please enter your username: ")
-    data = SHEET.worksheet('user')
-    usr = data.get_all_values()
-    print(usr)
-    if username.lower() == str(usr):
-        print("Correct credentials!")
-        pwd = input("Please enter your password: ")
-        data = SHEET.worksheet('password')
-        pw = data.get_all_values()
-        print(pw)
-        if pwd == str(pw):
-            print("correct details")
+# def login():
+#     username = input("Please enter your username: ")
+#     data = SHEET.worksheet('user')
+#     usr = data.get_all_values()
+#     print(usr)
+#     if username.lower() == str(usr):
+#         print("Correct credentials!")
+#         pwd = input("Please enter your password: ")
+#         data = SHEET.worksheet('password')
+#         pw = data.get_all_values()
+#         print(pw)
+#         if pwd == str(pw):
+#             print("correct details")
         
-    else:    
-        print("Incorrect credentials.")
-        main()
-
-
+#     else:    
+#         print("Incorrect credentials.")
+#         main()
 
 
 def main():
-    user = username()
-    pw = password()
-    update_username(user)
-    update_password(pw)
+    create_account()
 
 
-#main()
-login()
+main()
+#login()
+
+
