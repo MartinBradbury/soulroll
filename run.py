@@ -15,7 +15,7 @@ from os import system
 from pyfiglet import Figlet
 #pip3 install pyfiglet
 #from words import word_list
-
+f = Figlet(font='slant')
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -31,6 +31,11 @@ SHEET = GSPREAD_CLIENT.open('userdata')
 
 
 def welcome():
+    system('clear')
+    print(f.renderText('  Welcome'))
+    print(f.renderText('         To'))
+    print(f.renderText('  Warcraft'))
+    print(f.renderText('mini-games'))
     print("Welcome")
     print("[1] Login")
     print("[2] create account")
@@ -110,9 +115,6 @@ user_selection = dict({
 
 
 
-f = Figlet(font='slant')
-print(f.renderText('  Welcome'))
-print(f.renderText('         To'))
-print(f.renderText('  Warcraft'))
-print(f.renderText('mini-games'))
+
+
 main()
