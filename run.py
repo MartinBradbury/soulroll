@@ -26,7 +26,16 @@ SHEET = GSPREAD_CLIENT.open('userdata')
 
 
 
-
+def welcome():
+    print("Welcome")
+    print("[1] Login")
+    print("[2] create account")
+    print("[3] exit")
+    selection = input("What would you like to do?: ")
+    if selection in user_selection.keys():
+        return user_selection[selection]()
+    else:
+        intro()
 
 
 def create_account():
@@ -83,8 +92,13 @@ def login():
 
 
 def main():
-    create_account()
-    login()
+    welcome()
 
+
+user_selection = dict({
+    "1": login,
+    "2": create_account,
+    "3": exit
+    })  
 
 main()
