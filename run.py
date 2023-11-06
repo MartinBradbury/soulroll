@@ -35,6 +35,21 @@ def create_account():
 
 
 
+    input_username = input("username")
+    input_password = input("password")
+
+    data = SHEET.worksheet('username')
+    usr = data.get_all_records()
+    #print(usr)
+    match_found = False
+    for record in usr:
+        if record[''] == input_username and record[''] == input_password:
+            match_found = True
+            break
+    if match_found:
+        print("logged in")
+    else:
+        print("incorrect")
 # def login():
 #     username = input("Please enter your username: ")
 #     data = SHEET.worksheet('user')
@@ -56,6 +71,7 @@ def create_account():
 
 def main():
     create_account()
+    #login()
 
 
 main()
