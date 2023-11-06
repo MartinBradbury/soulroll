@@ -14,6 +14,8 @@ from os import system
 #to clear screen
 from pyfiglet import Figlet
 #pip3 install pyfiglet
+from time import sleep
+#time sleep
 #from words import word_list
 f = Figlet(font='slant')
 
@@ -31,7 +33,7 @@ SHEET = GSPREAD_CLIENT.open('userdata')
 
 
 def welcome():
-    system('clear')
+    clear()
     print(f.renderText('  Welcome'))
     print(f.renderText('         To'))
     print(f.renderText('  Warcraft'))
@@ -44,6 +46,8 @@ def welcome():
     if selection in user_selection.keys():
         return user_selection[selection]()
     else:
+        print("\nIncorrect selection, please try again")
+        sleep(3)
         welcome()
 
 
@@ -56,9 +60,11 @@ def create_account():
     username = input("Create a username: ").lower()
     if len(username) < 3:
         print("Username should be between 3 and 10 characters")
+        sleep(3)
         create_account()
     elif len(username) > 10:
         print("Username should be between 3 and 10 characters")
+        sleep(3)
         create_account()
     else:   
         print("Username accepted")
@@ -72,6 +78,7 @@ def create_account():
         hash1 = hashlib.md5(enc).hexdigest()
     else:
         print("Passwords do not match")
+        sleep(3)
         create_account()
 
 
@@ -101,6 +108,7 @@ def login():
         print("logged in")
     else:
         print("incorrect")
+        sleep(3)
         login()
 
 def game_select():
@@ -113,7 +121,7 @@ def game_select():
     selection = input("What would you like to do?: ")
     if selection == '1':
         print("Lets DeathRoll")
-        #deathroll()
+        deathroll()
     elif selection == '2':
         print("Lets have a Quiz")
         #quiz()
@@ -122,8 +130,74 @@ def game_select():
         main()
     else:
         print("please select [1], [2], [3]")
+        sleep(3)
         game_select()
 
+def deathroll():
+    system('clear')
+    print(f.renderText('Welcome to Deathroll\n'))
+    print("In this game you will play against the Lich King!")
+    print("\n You will take turns to roll a number between 1 - 100")
+    print("your next roll will be between 1 - the number YOU rolled")
+    print("You keep taking it in turns until your or the Lick King rolles a 1")
+    print("This a game of chance and the object is to not roll 1\n")
+    print("To start the game, please type roll\n")
+    roll = input(": ")
+    if roll.lower() == 'roll':
+        sleep(2)
+        random_num()
+    else:
+        print("please type roll to start the game")
+        sleep(2)
+        deathroll()
+
+def random_num():
+    system('clear')
+    print("rolling.........")
+    sleep(1)
+    number1 = random.randint(1, 100)
+    print(f"\nyou rolled: {number1}")
+    number2 = random.randint(1, 100)
+    input("press any key for computer roll")
+    print(f"the computer rolled: {number2}\n")
+    while (number1 + number2 != 1):
+        input("press any key to roll again")
+        number1 = random.randint(1, number1)
+        print(f"\nyou rolled: {number1}")
+        
+        if (number1 == 1):
+            print("Oh no, the Lich King defeated you!")
+            print("Congratulations Lich King!")
+            sleep(5)
+            break
+                  
+
+        input("press any key for computer roll")
+        number2 = random.randint(1, number2)
+        print(f"the computer rolled: {number2}\n")
+            
+        if (number2 == 1):
+            print("The Lich King lost")
+            print("Congratulations YOU won!")
+            sleep(5)
+            break
+        
+                    
+    else:
+        input("thankyou")
+
+    #playagain()
+    game_select()  
+
+
+
+def clear():
+   # for windows
+        system('cls')
+
+   # for mac and linux
+
+        system('clear')
 
 
 
@@ -132,14 +206,12 @@ def main():
     game_select()
 
 
+
 user_selection = dict({
     "1": login,
     "2": create_account,
     "3": exit
     })  
-
-
-
 
 
 main()
