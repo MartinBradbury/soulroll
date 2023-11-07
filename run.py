@@ -84,8 +84,7 @@ def create_account():
     score = 0
     upload = SHEET.worksheet('username')
     upload.append_row([username, hash1, score])
-    return username, score
-    
+    game_select()
 
 
 def login():
@@ -229,4 +228,24 @@ game_selection = dict({
     }) 
 
 
-main()
+#main()
+
+
+
+
+def update_cell():
+    SHEET = GSPREAD_CLIENT.open('userdata').sheet1
+    column_headers = SHEET.row_values(1)
+    username_index = column_headers.index('username') + 1
+    value_to_update = 12
+
+    for i in range(2, SHEET.row_count + 1):
+        username = SHEET.cell(i, username_index).value
+
+        if username == 'ddd':
+            SHEET.update_cell(i, column_headers.index('score') + 1, value_to_update)
+            print("score updated")
+            break
+
+update_cell()
+
