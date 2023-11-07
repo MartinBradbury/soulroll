@@ -119,19 +119,27 @@ def game_select():
     print("[2] World of Warcraft Trivia Quiz")
     print("[3] Logout")
     selection = input("What would you like to do?: ")
-    if selection == '1':
-        print("Lets DeathRoll")
-        deathroll()
-    elif selection == '2':
-        print("Lets have a Quiz")
-        #quiz()
-    elif selection == '3':
-        print("Logged out!")
-        main()
+
+    if selection in game_selection.keys():
+        return game_selection[selection]()
     else:
-        print("please select [1], [2], [3]")
+        print("\nIncorrect selection, please try again")
         sleep(3)
         game_select()
+
+    # if selection == '1':
+    #     print("Lets DeathRoll")
+    #     deathroll()
+    # elif selection == '2':
+    #     print("Lets have a Quiz")
+    #     #quiz()
+    # elif selection == '3':
+    #     print("Logged out!")
+    #     main()
+    # else:
+    #     print("please select [1], [2], [3]")
+    #     sleep(3)
+    #     game_select()
 
 def deathroll():
     system('clear')
@@ -184,7 +192,7 @@ def random_num():
         
                     
     else:
-        input("thankyou")
+        input("error")
 
     #playagain.....()
     game_select()  
@@ -212,6 +220,12 @@ user_selection = dict({
     "2": create_account,
     "3": exit
     })  
+
+game_selection = dict({
+    "1": deathroll,
+    "2": quit,
+    "3": welcome
+    }) 
 
 
 main()
