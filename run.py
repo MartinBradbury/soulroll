@@ -16,6 +16,7 @@ from pyfiglet import Figlet
 #pip3 install pyfiglet
 from time import sleep
 #time sleep
+import openpyxl 
 #from words import word_list
 f = Figlet(font='slant')
 
@@ -254,17 +255,15 @@ def update_cell():
     #value to update
     value_to_update = 40
 
-    for i in range(100, SHEET.row_count + 1):
-        username = SHEET.cell(i, username_index).value
-        # print(username)
+    row_count = len(SHEET.get_all_values())
 
-        if username == 'donna':
+    for i in range(1, SHEET.row_count + 1):
+        username = SHEET.cell(i, username_index).value
+        print(username)
+
+        if username == 'test':
             SHEET.update_cell(i, column_headers.index('score') + 1, value_to_update)
-            break
-        if username == 'None':
-            break
-        
-        
+            return
 
 update_cell()
 get_current_score()
