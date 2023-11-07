@@ -43,9 +43,19 @@ def welcome():
     print("[2] create account")
     print("[3] exit")
     selection = input("What would you like to do?: ")
+    if selection in welcome_select.keys():
+        return welcome_select[selection]()
+    else:
+        print("\nIncorrect selection, please try again")
+        sleep(3)
+        welcome_()
+
+
+
     if selection == '1':
         print("Lets log you in")
         sleep(3)
+        main()
     elif selection == '2':
         print("lets create an account")
         sleep(3)
@@ -94,10 +104,6 @@ def create_account():
 
 
 def login(input_username, auth_hash):
-    system('clear')
-    print(f.renderText('Login'))
-    print("Welcome to Login")
-    print("Please Login using your username and password\n")
     data = SHEET.worksheet('username')
     usr = data.get_all_records()
     match = False
@@ -106,7 +112,8 @@ def login(input_username, auth_hash):
             match = True
             
     if match:
-        print("logged in")
+        print("You have sucessfully logged in.....")
+        sleep(3)
         return True
 
     else:
@@ -115,7 +122,7 @@ def login(input_username, auth_hash):
         login()
 
 def game_select():
-    #system('clear')
+    system('clear')
     print(f.renderText('Mini-Games'))
     print("Which game would you like to play?\n")
     print("[1] DeathRoll")
@@ -232,13 +239,17 @@ def update_score():
 
 
 def main():
-    welcome()
-
-    input_username = input("username: ")
-    input_password = maskpass.askpass("\npassword: ")
+    
+    print("Initialising......")
+    sleep(2)
+    system('clear')
+    print(f.renderText('Login'))
+    print("\nWelcome Traveller,\n")
+    input_username = input("Please enter your username: ")
+    input_password = maskpass.askpass("\nPlease enter your password: ")
     auth = input_password.encode()
     auth_hash = hashlib.md5(auth).hexdigest()
-
+    
     if login(input_username, auth_hash):
         get_current_score(input_username)
     else:
@@ -247,13 +258,20 @@ def main():
     game_select()
     
 
+welcome_select = dict({
+    "1": main,
+    "2": create_account,
+    "3": exit
+    })
+
+
 game_selection = dict({
     "1": deathroll,
     "2": quit,
     "3": welcome
     }) 
 
-
+welcome()
 main()
 
 
