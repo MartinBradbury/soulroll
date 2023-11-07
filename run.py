@@ -230,22 +230,43 @@ game_selection = dict({
 
 #main()
 
-
-
-
-def update_cell():
+def get_current_score():
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
     column_headers = SHEET.row_values(1)
     username_index = column_headers.index('username') + 1
-    value_to_update = 12
-
-    for i in range(2, SHEET.row_count + 1):
+    for i in range(1, SHEET.row_count + 1):
         username = SHEET.cell(i, username_index).value
+        if username == 'dave':
+            score = SHEET.cell(i, column_headers.index('score') + 1).value
+            print(f"well done {username} your score is {score}")
+            return score
 
-        if username == 'ddd':
+def update_cell():
+    #open worksheet and sheet1
+    SHEET = GSPREAD_CLIENT.open('userdata').sheet1
+
+    #assign a variable to row
+    column_headers = SHEET.row_values(1)
+
+    #assign a variable to column headers in username +1 as index
+    username_index = column_headers.index('username') + 1
+
+    #value to update
+    value_to_update = 40
+
+    for i in range(100, SHEET.row_count + 1):
+        username = SHEET.cell(i, username_index).value
+        # print(username)
+
+        if username == 'donna':
             SHEET.update_cell(i, column_headers.index('score') + 1, value_to_update)
-            print("score updated")
             break
+        if username == 'None':
+            break
+        
+        
 
 update_cell()
+get_current_score()
+
 
