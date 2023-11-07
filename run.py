@@ -155,7 +155,7 @@ def deathroll():
         
         deathroll()
 
-def random_num():
+def random_num(score):
     system('clear')
     print("rolling.........")
     sleep(1)
@@ -172,6 +172,7 @@ def random_num():
         if (number1 == 1):
             print("Oh no, the Lich King defeated you!")
             print("Congratulations Lich King!")
+            print(score)
             sleep(3)
             break
                   
@@ -183,13 +184,15 @@ def random_num():
         if (number2 == 1):
             print("The Lich King lost")
             print("Congratulations YOU won!")
+            score += 1
+            print(score)
             sleep(3)
             break
-        
                     
     else:
         input("error")
 
+    random_num(score)
     game_select()  
 
 
@@ -213,7 +216,8 @@ def get_current_score(input_username):
             print(f"well done {username} your score is {score}")
             return score
 
-def update_score():
+
+def update_score(input_username, int(score)):
     #open worksheet and sheet1
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
 
@@ -224,7 +228,7 @@ def update_score():
     username_index = column_headers.index('username') + 1
 
     #value to update
-    value_to_update = 40
+    value_to_update = str(score)
 
     row_count = len(SHEET.get_all_values())
 
@@ -232,8 +236,9 @@ def update_score():
         username = SHEET.cell(i, username_index).value
         print(username)
 
-        if username == 'test':
+        if username == input_username:
             SHEET.update_cell(i, column_headers.index('score') + 1, value_to_update)
+            print(f"well done {username} your score is {score}")
             return
 
 
@@ -251,11 +256,26 @@ def main():
     auth_hash = hashlib.md5(auth).hexdigest()
     
     if login(input_username, auth_hash):
-        get_current_score(input_username)
+        True
+        #  get_current_score(input_username)
     else:
         print("error")
     
-    game_select()
+
+    SHEET = GSPREAD_CLIENT.open('userdata').sheet1
+    column_headers = SHEET.row_values(1)
+    username_index = column_headers.index('username') + 1
+    for i in range(1, SHEET.row_count + 1):
+        username = SHEET.cell(i, username_index).value
+        if username == input_username:
+            score = SHEET.cell(i, column_headers.index('score') + 1).value
+            print(f"well done {username} your score is {score}")
+            random_num(int(score))
+    
+    update_score(input_username, int(score))
+    
+    #game_select(score)
+    
     
 
 welcome_select = dict({
