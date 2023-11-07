@@ -81,10 +81,11 @@ def create_account():
         sleep(3)
         create_account()
 
-
+    score = 0
     upload = SHEET.worksheet('username')
-    upload.append_row([username, hash1])
-    welcome()
+    upload.append_row([username, hash1, score])
+    return username, score
+    
 
 
 def login():
