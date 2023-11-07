@@ -16,7 +16,6 @@ from pyfiglet import Figlet
 #pip3 install pyfiglet
 from time import sleep
 #time sleep
-import openpyxl 
 #from words import word_list
 f = Figlet(font='slant')
 
@@ -44,13 +43,19 @@ def welcome():
     print("[2] create account")
     print("[3] exit")
     selection = input("What would you like to do?: ")
-    if selection in user_selection.keys():
-        return user_selection[selection]()
-    else:
-        print("\nIncorrect selection, please try again")
+    if selection == '1':
+        print("Lets log you in")
         sleep(3)
+    elif selection == '2':
+        print("lets create an account")
+        sleep(3)
+        create_account()
+    elif selection == '3':
+        print("Goodbye")
+        exit()
+    else:
+        print("please select an option")
         welcome()
-
 
 def create_account():
     system('clear')
@@ -88,32 +93,29 @@ def create_account():
     game_select()
 
 
-def login():
+def login(input_username, auth_hash):
     system('clear')
     print(f.renderText('Login'))
     print("Welcome to Login")
     print("Please Login using your username and password\n")
-    input_username = input("username")
-    input_password = maskpass.askpass("\npassword")
-    auth = input_password.encode()
-    auth_hash = hashlib.md5(auth).hexdigest()
-
     data = SHEET.worksheet('username')
     usr = data.get_all_records()
     match = False
     for record in usr:
         if record['username'] == input_username and record['password'] == auth_hash:
             match = True
-            break
+            
     if match:
         print("logged in")
+        return True
+
     else:
         print("incorrect")
         sleep(3)
         login()
 
 def game_select():
-    system('clear')
+    #system('clear')
     print(f.renderText('Mini-Games'))
     print("Which game would you like to play?\n")
     print("[1] DeathRoll")
@@ -128,20 +130,6 @@ def game_select():
         sleep(3)
         game_select()
 
-    # if selection == '1':
-    #     print("Lets DeathRoll")
-    #     deathroll()
-    # elif selection == '2':
-    #     print("Lets have a Quiz")
-    #     #quiz()
-    # elif selection == '3':
-    #     print("Logged out!")
-    #     main()
-    # else:
-    #     print("please select [1], [2], [3]")
-    #     sleep(3)
-    #     game_select()
-
 def deathroll():
     system('clear')
     print(f.renderText('Welcome to Deathroll\n'))
@@ -153,11 +141,11 @@ def deathroll():
     print("To start the game, please type roll\n")
     roll = input(": ")
     if roll.lower() == 'roll':
-        sleep(2)
+        
         random_num()
     else:
         print("please type roll to start the game")
-        sleep(2)
+        
         deathroll()
 
 def random_num():
@@ -177,7 +165,7 @@ def random_num():
         if (number1 == 1):
             print("Oh no, the Lich King defeated you!")
             print("Congratulations Lich King!")
-            sleep(5)
+            sleep(3)
             break
                   
 
@@ -188,14 +176,13 @@ def random_num():
         if (number2 == 1):
             print("The Lich King lost")
             print("Congratulations YOU won!")
-            sleep(5)
+            sleep(3)
             break
         
                     
     else:
         input("error")
 
-    #playagain.....()
     game_select()  
 
 
@@ -208,41 +195,18 @@ def clear():
 
         system('clear')
 
-
-
-def main():
-    welcome()
-    game_select()
-
-
-
-user_selection = dict({
-    "1": login,
-    "2": create_account,
-    "3": exit
-    })  
-
-game_selection = dict({
-    "1": deathroll,
-    "2": quit,
-    "3": welcome
-    }) 
-
-
-#main()
-
-def get_current_score():
+def get_current_score(input_username):
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
     column_headers = SHEET.row_values(1)
     username_index = column_headers.index('username') + 1
     for i in range(1, SHEET.row_count + 1):
         username = SHEET.cell(i, username_index).value
-        if username == 'dave':
+        if username == input_username:
             score = SHEET.cell(i, column_headers.index('score') + 1).value
             print(f"well done {username} your score is {score}")
             return score
 
-def update_cell():
+def update_score():
     #open worksheet and sheet1
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
 
@@ -265,7 +229,31 @@ def update_cell():
             SHEET.update_cell(i, column_headers.index('score') + 1, value_to_update)
             return
 
-update_cell()
-get_current_score()
+
+
+def main():
+    welcome()
+
+    input_username = input("username: ")
+    input_password = maskpass.askpass("\npassword: ")
+    auth = input_password.encode()
+    auth_hash = hashlib.md5(auth).hexdigest()
+
+    if login(input_username, auth_hash):
+        get_current_score(input_username)
+    else:
+        print("error")
+    
+    game_select()
+    
+
+game_selection = dict({
+    "1": deathroll,
+    "2": quit,
+    "3": welcome
+    }) 
+
+
+main()
 
 
