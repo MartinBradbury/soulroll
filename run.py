@@ -306,13 +306,40 @@ def main():
     test_score = random_num(new_score, input_username)
     sleep(1)
 
-
     donna = test_score
     print(f"your score is {donna}")
     update_score(input_username, donna)
     sleep(10)
+    # play = input("play again?: ")
+    while True:
+        print("would you like to play again?")
+        response = input().lower()
 
-    input("playagain? ")
+        if response == 'y':
+            print("game restarting.......")
+            sleep(5) 
+            # play.lower() == 'y':
+            score = get_current_score(input_username)
+            new_score = int(score)
+            test_score = random_num(new_score, input_username)
+            donna = test_score
+            update_score(input_username, donna)
+        # input("play again?: ")
+
+        elif response == 'n':
+            print("Thankyou for playing!")
+            welcome()
+        else:
+            print("invalid choice")
+
+    # if play.lower() == 'n':
+    #     welcome()
+    # if play.lower() != 'n' or 'y':
+    #     print("error")
+    #     input("try again:? ")
+    # else:
+    #     print("incorrect selection")
+        
 
 
     
