@@ -155,7 +155,7 @@ def deathroll():
         
         deathroll()
 
-def random_num(score):
+def random_num(new_score, input_username):
     system('clear')
     print("rolling.........")
     sleep(1)
@@ -172,10 +172,12 @@ def random_num(score):
         if (number1 == 1):
             print("Oh no, the Lich King defeated you!")
             print("Congratulations Lich King!")
-            print(score)
-            sleep(3)
-            break
-                  
+            print(new_score)
+            print('play again?')
+            if input(": ") == 'y':
+                random_num(new_score, input_username)
+            
+            return new_score       
 
         input("press any key for computer roll")
         number2 = random.randint(1, number2)
@@ -184,16 +186,34 @@ def random_num(score):
         if (number2 == 1):
             print("The Lich King lost")
             print("Congratulations YOU won!")
-            score += 1
-            print(score)
-            sleep(3)
-            break
-                    
+            new_score += 1
+            print(new_score)
+            print('play again?')
+            if input(": ") == 'y':
+                random_num(new_score, input_username)
+            
+            return new_score
     else:
-        input("error")
+        print("play again?")
+        if input(": ") == 'y':
+            random_num(new_score, input_username)
+        
+        
 
-    random_num(score)
-    game_select()  
+
+
+
+
+
+
+
+
+    
+        
+            
+
+    
+    #game_select()  
 
 
 
@@ -217,7 +237,7 @@ def get_current_score(input_username):
             return score
 
 
-def update_score(input_username, int(score)):
+def update_score(input_username, new_score):
     #open worksheet and sheet1
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
 
@@ -228,7 +248,7 @@ def update_score(input_username, int(score)):
     username_index = column_headers.index('username') + 1
 
     #value to update
-    value_to_update = str(score)
+    value_to_update = 10
 
     row_count = len(SHEET.get_all_values())
 
@@ -261,18 +281,34 @@ def main():
     else:
         print("error")
     
+    score = get_current_score(input_username)
+    new_score = int(score)
 
-    SHEET = GSPREAD_CLIENT.open('userdata').sheet1
-    column_headers = SHEET.row_values(1)
-    username_index = column_headers.index('username') + 1
-    for i in range(1, SHEET.row_count + 1):
-        username = SHEET.cell(i, username_index).value
-        if username == input_username:
-            score = SHEET.cell(i, column_headers.index('score') + 1).value
-            print(f"well done {username} your score is {score}")
-            random_num(int(score))
+
+    # SHEET = GSPREAD_CLIENT.open('userdata').sheet1
+    # column_headers = SHEET.row_values(1)
+    # username_index = column_headers.index('username') + 1
+    # for i in range(1, SHEET.row_count + 1):
+    #     username = SHEET.cell(i, username_index).value
+    #     if username == input_username:
+    #         score = SHEET.cell(i, column_headers.index('score') + 1).value
+    #         print(f"well done {username} your score is {score}")
+    #         new_score = int(score)
+    #     else:
+    #         print("not a user")    
+
+
+
+
+            
+            
     
-    update_score(input_username, int(score))
+    sleep(1)
+    test_score = random_num(new_score, input_username)
+    donna = int(test_score)
+    print(donna)
+    sleep(10)
+    # update_score(input_username, score)
     
     #game_select(score)
     
@@ -285,11 +321,11 @@ welcome_select = dict({
     })
 
 
-game_selection = dict({
-    "1": deathroll,
-    "2": quit,
-    "3": welcome
-    }) 
+# game_selection = dict({
+#     "1": deathroll,
+#     "2": quit,
+#     "3": welcome
+#     }) 
 
 welcome()
 main()
