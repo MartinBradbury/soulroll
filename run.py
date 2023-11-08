@@ -30,8 +30,6 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('userdata')
 
-
-
 def welcome():
     clear()
     print(f.renderText('  Welcome'))
@@ -44,27 +42,12 @@ def welcome():
     print("[3] exit")
     selection = input("What would you like to do?: ")
     if selection in welcome_select.keys():
+        print(f"You selected option {selection}, initilising.....")
+        sleep(3)
         return welcome_select[selection]()
     else:
         print("\nIncorrect selection, please try again")
         sleep(3)
-        welcome_()
-
-
-
-    if selection == '1':
-        print("Lets log you in")
-        sleep(3)
-        main()
-    elif selection == '2':
-        print("lets create an account")
-        sleep(3)
-        create_account()
-    elif selection == '3':
-        print("Goodbye")
-        exit()
-    else:
-        print("please select an option")
         welcome()
 
 def create_account():
@@ -100,8 +83,7 @@ def create_account():
     score = 0
     upload = SHEET.worksheet('username')
     upload.append_row([username, hash1, score])
-    game_select()
-
+    welcome()
 
 def login(input_username, auth_hash):
     data = SHEET.worksheet('username')
@@ -110,32 +92,17 @@ def login(input_username, auth_hash):
     for record in usr:
         if record['username'] == input_username and record['password'] == auth_hash:
             match = True
-            
+            break       
     if match:
-        print("You have sucessfully logged in.....")
+        print("Logging in.....")
         sleep(3)
-        return True
-
+        print("Login Successful")
+        sleep(1)
+        # return True
     else:
-        print("incorrect")
+        print("Incorrect username or password. Please try again")
         sleep(3)
-        login()
-
-def game_select():
-    system('clear')
-    print(f.renderText('Mini-Games'))
-    print("Which game would you like to play?\n")
-    print("[1] DeathRoll")
-    print("[2] World of Warcraft Trivia Quiz")
-    print("[3] Logout")
-    selection = input("What would you like to do?: ")
-
-    if selection in game_selection.keys():
-        return game_selection[selection]()
-    else:
-        print("\nIncorrect selection, please try again")
-        sleep(3)
-        game_select()
+        welcome()
 
 def deathroll():
     system('clear')
@@ -148,11 +115,9 @@ def deathroll():
     print("To start the game, please type roll\n")
     roll = input(": ")
     if roll.lower() == 'roll':
-        
-        random_num()
+        True
     else:
         print("please type roll to start the game")
-        
         deathroll()
 
 def random_num(new_score, input_username):
@@ -168,60 +133,27 @@ def random_num(new_score, input_username):
         input("press any key to roll again")
         number1 = random.randint(1, number1)
         print(f"\nyou rolled: {number1}")
-        
         if (number1 == 1):
             print("Oh no, the Lich King defeated you!")
             print("Congratulations Lich King!")
             new_score += 0
             print(new_score)
             break
-            
-                 
-
         input("press any key for computer roll")
         number2 = random.randint(1, 1)
-        print(f"the computer rolled: {1}\n")
-            
+        print(f"the computer rolled: {1}\n")   
         if (number2 == 1):
             print("The Lich King lost")
             print("Congratulations YOU won!")
             new_score += 1
-            print(new_score)
+            print(f"Well done {input_username} your new score is {new_score}")
             break
-            
-    
-    # play_again = input("play again? ").lower()
-    # if == 'y'
-
-    print(new_score)
     return new_score
-
-        
-        
-
-
-
-
-
-
-
-
-
-    
-        
-            
-
-    
-    #game_select()  
-
-
 
 def clear():
    # for windows
         system('cls')
-
    # for mac and linux
-
         system('clear')
 
 def get_current_score(input_username):
@@ -232,40 +164,28 @@ def get_current_score(input_username):
         username = SHEET.cell(i, username_index).value
         if username == input_username:
             score = SHEET.cell(i, column_headers.index('score') + 1).value
-            print(f"well done {username} your score is {score}")
+            system('clear')
+            print(f"Hello {username}! your current score is {score}")
+            input("Press the return key to continue")
             return score
-
 
 def update_score(input_username, donna):
     #open worksheet and sheet1
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
-
     #assign a variable to row
     column_headers = SHEET.row_values(1)
-
     #assign a variable to column headers in username +1 as index
     username_index = column_headers.index('username') + 1
-
     #value to update
     value_to_update = donna
-
     row_count = len(SHEET.get_all_values())
-
     for i in range(1, SHEET.row_count + 1):
         username = SHEET.cell(i, username_index).value
-        print(username)
-
         if username == input_username:
             SHEET.update_cell(i, column_headers.index('score') + 1, value_to_update)
-            print(f"well done {username} your score is {value_to_update}")
-            return
-
-
+            return update_score
 
 def main():
-    
-    print("Initialising......")
-    sleep(2)
     system('clear')
     print(f.renderText('Login'))
     print("\nWelcome Traveller,\n")
@@ -273,97 +193,39 @@ def main():
     input_password = maskpass.askpass("\nPlease enter your password: ")
     auth = input_password.encode()
     auth_hash = hashlib.md5(auth).hexdigest()
-    
-    if login(input_username, auth_hash):
-        True
-        #  get_current_score(input_username)
-    else:
-        print("error")
-    
+    login(input_username, auth_hash)
     score = get_current_score(input_username)
     new_score = int(score)
-
-
-    # SHEET = GSPREAD_CLIENT.open('userdata').sheet1
-    # column_headers = SHEET.row_values(1)
-    # username_index = column_headers.index('username') + 1
-    # for i in range(1, SHEET.row_count + 1):
-    #     username = SHEET.cell(i, username_index).value
-    #     if username == input_username:
-    #         score = SHEET.cell(i, column_headers.index('score') + 1).value
-    #         print(f"well done {username} your score is {score}")
-    #         new_score = int(score)
-    #     else:
-    #         print("not a user")    
-
-
-
-
-            
-            
-    
     sleep(1)
+    deathroll()
     test_score = random_num(new_score, input_username)
     sleep(1)
-
     donna = test_score
-    print(f"your score is {donna}")
     update_score(input_username, donna)
     sleep(10)
-    # play = input("play again?: ")
     while True:
         print("would you like to play again?")
-        response = input().lower()
-
+        response = input("Please select (y/n): ").lower()
         if response == 'y':
             print("game restarting.......")
             sleep(5) 
-            # play.lower() == 'y':
             score = get_current_score(input_username)
             new_score = int(score)
             test_score = random_num(new_score, input_username)
             donna = test_score
             update_score(input_username, donna)
-        # input("play again?: ")
-
         elif response == 'n':
             print("Thankyou for playing!")
             welcome()
         else:
             print("invalid choice")
-
-    # if play.lower() == 'n':
-    #     welcome()
-    # if play.lower() != 'n' or 'y':
-    #     print("error")
-    #     input("try again:? ")
-    # else:
-    #     print("incorrect selection")
-        
-
-
-    
-
-
-
-    # update_score(input_username, score)
-    
-    #game_select(score)
-    
-    
-
+    else:
+        print("incorrect")
 welcome_select = dict({
     "1": main,
     "2": create_account,
     "3": exit
     })
-
-
-# game_selection = dict({
-#     "1": deathroll,
-#     "2": quit,
-#     "3": welcome
-#     }) 
 
 welcome()
 main()
