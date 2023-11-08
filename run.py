@@ -172,31 +172,30 @@ def random_num(new_score, input_username):
         if (number1 == 1):
             print("Oh no, the Lich King defeated you!")
             print("Congratulations Lich King!")
+            new_score += 0
             print(new_score)
-            print('play again?')
-            if input(": ") == 'y':
-                random_num(new_score, input_username)
-            return new_score
+            break
+            
                  
 
         input("press any key for computer roll")
-        number2 = random.randint(1, number2)
-        print(f"the computer rolled: {number2}\n")
+        number2 = random.randint(1, 1)
+        print(f"the computer rolled: {1}\n")
             
         if (number2 == 1):
             print("The Lich King lost")
             print("Congratulations YOU won!")
             new_score += 1
             print(new_score)
-            print('play again?')
-            if input(": ") == 'y':
-                random_num(new_score, input_username)
-            return new_score
+            break
             
-    else:
-        print("play again?")
-        if input(": ") == 'y':
-            random_num(new_score, input_username)
+    
+    # play_again = input("play again? ").lower()
+    # if == 'y'
+
+    print(new_score)
+    return new_score
+
         
         
 
@@ -305,11 +304,18 @@ def main():
     
     sleep(1)
     test_score = random_num(new_score, input_username)
-    donna = int(test_score)
-    print(donna)
-    sleep(10)
+    sleep(1)
+
+
+    donna = test_score
+    print(f"your score is {donna}")
     update_score(input_username, donna)
     sleep(10)
+
+    input("playagain? ")
+
+
+    
 
 
 
