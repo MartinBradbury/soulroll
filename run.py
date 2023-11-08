@@ -176,8 +176,8 @@ def random_num(new_score, input_username):
             print('play again?')
             if input(": ") == 'y':
                 random_num(new_score, input_username)
-            
-            return new_score       
+            return new_score
+                 
 
         input("press any key for computer roll")
         number2 = random.randint(1, number2)
@@ -191,8 +191,8 @@ def random_num(new_score, input_username):
             print('play again?')
             if input(": ") == 'y':
                 random_num(new_score, input_username)
-            
             return new_score
+            
     else:
         print("play again?")
         if input(": ") == 'y':
@@ -237,7 +237,7 @@ def get_current_score(input_username):
             return score
 
 
-def update_score(input_username, new_score):
+def update_score(input_username, donna):
     #open worksheet and sheet1
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
 
@@ -248,7 +248,7 @@ def update_score(input_username, new_score):
     username_index = column_headers.index('username') + 1
 
     #value to update
-    value_to_update = 10
+    value_to_update = donna
 
     row_count = len(SHEET.get_all_values())
 
@@ -258,7 +258,7 @@ def update_score(input_username, new_score):
 
         if username == input_username:
             SHEET.update_cell(i, column_headers.index('score') + 1, value_to_update)
-            print(f"well done {username} your score is {score}")
+            print(f"well done {username} your score is {value_to_update}")
             return
 
 
@@ -308,6 +308,11 @@ def main():
     donna = int(test_score)
     print(donna)
     sleep(10)
+    update_score(input_username, donna)
+    sleep(10)
+
+
+
     # update_score(input_username, score)
     
     #game_select(score)
