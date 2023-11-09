@@ -32,8 +32,6 @@ SHEET = GSPREAD_CLIENT.open('userdata')
 
 def welcome():
     clear()
-    print(f.renderText('  Welcome'))
-    print(f.renderText('         To'))
     print(f.renderText('  Warcraft'))
     print(f.renderText('mini-games'))
     print("Welcome")
