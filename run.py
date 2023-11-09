@@ -16,7 +16,8 @@ from pyfiglet import Figlet
 #pip3 install pyfiglet
 from time import sleep
 #time sleep
-#from words import word_list
+import pandas as pd 
+
 f = Figlet(font='slant')
 
 SCOPE = [
@@ -37,7 +38,8 @@ def welcome():
     print("Welcome")
     print("[1] Login")
     print("[2] create account")
-    print("[3] exit")
+    print("[3] Leaderboard")
+    print("[4] exit")
     selection = input("What would you like to do?: ")
     if selection in welcome_select.keys():
         print(f"You selected option {selection}, initilising.....")
@@ -101,6 +103,19 @@ def login(input_username, auth_hash):
         print("Incorrect username or password. Please try again")
         sleep(3)
         welcome()
+
+def leaderboard():
+    clear()
+    SHEET = GSPREAD_CLIENT.open('userdata').sheet1
+    data = SHEET.get_all_records()
+    df = pd.DataFrame(data)
+    df = df.sort_values(by='score', ascending=False)
+    print(f.renderText('Leaderboard'))
+    print(df.to_string(columns=['username', 'score'], index=False))
+    sleep(5)
+    input("\nPress enter to return to main menu")
+    welcome()
+
 
 def deathroll():
     system('clear')
@@ -222,10 +237,16 @@ def main():
 welcome_select = dict({
     "1": main,
     "2": create_account,
-    "3": exit
+    "3": leaderboard,
+    "4": exit
     })
 
 welcome()
 main()
+
+
+
+
+
 
 
