@@ -54,7 +54,7 @@ def create_account():
     SHEET = GSPREAD_CLIENT.open('userdata')
     print("\nWelcome to account creation.\n")
     print("Please create a username between 3-10 characters and starts with any letter\n")
-    username = input("Create a username: \n").lower()
+    username = input("Create a username: ").lower()
     if len(username) < 3:
         print("Username should be between 3 and 10 characters")
         sleep(3)
@@ -67,8 +67,8 @@ def create_account():
         print("Username accepted")
 
     print("Please create a password starting with any letter")
-    password = maskpass.askpass("\nCreate a password: \n")
-    password_check = maskpass.askpass("\nRe-enter password \n")
+    password = maskpass.askpass("\nCreate a password: ")
+    password_check = maskpass.askpass("\nRe-enter password ")
     if password == password_check:
         print("\nAccount created successfully")
         enc = password_check.encode()
@@ -111,7 +111,7 @@ def deathroll():
     print("You keep taking it in turns until your or the Lick King rolles a 1")
     print("This a game of chance and the object is to not roll 1\n")
     print("To start the game, please type roll\n")
-    roll = input(": \n")
+    roll = input(": ")
     if roll.lower() == 'roll':
         True
     else:
@@ -187,7 +187,7 @@ def main():
     system('clear')
     print(f.renderText('Login'))
     print("\nWelcome Traveller,\n")
-    input_username = input("Please enter your username: \n")
+    input_username = input("Please enter your username: ")
     input_password = maskpass.askpass("\nPlease enter your password: \n")
     auth = input_password.encode()
     auth_hash = hashlib.md5(auth).hexdigest()
@@ -203,7 +203,7 @@ def main():
     sleep(10)
     while True:
         print("would you like to play again?")
-        response = input("Please select (y/n): \n").lower()
+        response = input("Please select (y/n): ").lower()
         if response == 'y':
             print("game restarting.......")
             sleep(5) 
