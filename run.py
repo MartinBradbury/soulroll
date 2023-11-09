@@ -56,7 +56,7 @@ def create_account():
     SHEET = GSPREAD_CLIENT.open('userdata')
     print("\nWelcome to account creation.\n")
     print("Please create a username between 3-10 characters and starts with any letter\n")
-    username = input("Create a username: ").lower()
+    username = input("Create a username: \n").lower()
     if len(username) < 3:
         print("Username should be between 3 and 10 characters")
         sleep(3)
@@ -69,8 +69,8 @@ def create_account():
         print("Username accepted")
 
     print("Please create a password starting with any letter")
-    password = maskpass.askpass("\nCreate a password: ")
-    password_check = maskpass.askpass("\nRe-enter password ")
+    password = maskpass.askpass("\nCreate a password: \n")
+    password_check = maskpass.askpass("\nRe-enter password \n")
     if password == password_check:
         print("\nAccount created successfully")
         enc = password_check.encode()
@@ -113,7 +113,7 @@ def deathroll():
     print("You keep taking it in turns until your or the Lick King rolles a 1")
     print("This a game of chance and the object is to not roll 1\n")
     print("To start the game, please type roll\n")
-    roll = input(": ")
+    roll = input(": \n")
     if roll.lower() == 'roll':
         True
     else:
@@ -139,7 +139,7 @@ def random_num(new_score, input_username):
             new_score += 0
             print(new_score)
             break
-        input("press any key for computer roll")
+        input("press any key for computer roll\n")
         number2 = random.randint(1, 1)
         print(f"the computer rolled: {1}\n")   
         if (number2 == 1):
@@ -189,8 +189,8 @@ def main():
     system('clear')
     print(f.renderText('Login'))
     print("\nWelcome Traveller,\n")
-    input_username = input("Please enter your username: ")
-    input_password = maskpass.askpass("\nPlease enter your password: ")
+    input_username = input("Please enter your username: \n")
+    input_password = maskpass.askpass("\nPlease enter your password: \n")
     auth = input_password.encode()
     auth_hash = hashlib.md5(auth).hexdigest()
     login(input_username, auth_hash)
@@ -205,7 +205,7 @@ def main():
     sleep(10)
     while True:
         print("would you like to play again?")
-        response = input("Please select (y/n): ").lower()
+        response = input("Please select (y/n): \n").lower()
         if response == 'y':
             print("game restarting.......")
             sleep(5) 
