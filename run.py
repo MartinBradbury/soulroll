@@ -90,7 +90,6 @@ def create_account():
         print("Passwords do not match")
         sleep(3)
         create_account()
-
     score = 0
     upload = SHEET.worksheet('username')
     upload.append_row([username, hash1, score])
@@ -124,8 +123,15 @@ def username_check(username):
     return True
     
 
-
 def login(input_username, auth_hash):
+    """
+    This function take the username input and password input from the main function.
+    It opens google sheet userdata and gets all records. It looks through the records
+    to find a match for the username input and password input. If a match is found the loop
+    is broken and returned to the main function after a pause where the terminal displays
+    logging in and login successful. If no match is found the user is returned to the 
+    welcome function.
+    """
     data = SHEET.worksheet('username')
     usr = data.get_all_records()
     match = False
@@ -138,13 +144,22 @@ def login(input_username, auth_hash):
         sleep(3)
         print("Login Successful")
         sleep(1)
-        # return True
     else:
         print("Incorrect username or password. Please try again")
         sleep(3)
         welcome()
 
+
 def leaderboard():
+    """
+    This function is selected from the welcome function. It clears the terminal and opens
+    the google sheet userdata. It gets all records from the sheet and stores it as a 
+    pandas dataframe. It arranges the data from by the score column in the google sheet
+    from highest to lowers. The heading leaderboard is printed to the terminal. Only the 
+    usernames and scores are printed to the terminal from highest to lowers and 
+    the index removed. The is a 5 second delay and then a print statment appers under the
+    dataframe informing the user to press enter to continue to the welcome function.  
+    """
     clear()
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
     data = SHEET.get_all_records()
