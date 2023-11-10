@@ -61,6 +61,9 @@ def create_account():
         print("Username should be between 3 and 10 characters")
         sleep(3)
         create_account()
+    if any(char.isdigit() for char in username):
+        print("Username cannot contain numbers")
+        create_account()
     elif len(username) > 10:
         print("Username should be between 3 and 10 characters")
         sleep(3)
@@ -131,6 +134,7 @@ def deathroll():
         True
     else:
         print("please type roll to start the game")
+        sleep(3)
         deathroll()
 
 def random_num(new_score, input_username):
