@@ -50,30 +50,6 @@ def welcome():
         sleep(3)
         welcome()
 
-def username_check(username):
-    try:
-        [str(username) for username in username]
-        if len(username) < 3:
-            raise ValueError(f"error")
-        if len(username) > 10:
-            raise ValueError(f"error")
-        if any(char.isdigit() for char in username):
-            raise ValueError(f"error")
-        else:
-            return True
-
-    except ValueError as e:
-        """
-        e variable is standard python short and for error
-        """
-        print(f"Invalid username: {e}, it must contain 3 to 10 characters and no numbers\n")
-        return False 
-        """ if the error occurs return false"""
-
-
-    return True
-    """ If the try works and data valied return true"""
-
 def create_account():
     #system('clear')
     print(f.renderText('Create Account'))
@@ -84,7 +60,7 @@ def create_account():
     if username_check(username) == False:
         create_account()
     else:
-        return True
+        print("username accepted")
     # if len(username) < 3:
     #     print("Username should be between 3 and 10 characters")
     #     sleep(3)
@@ -115,6 +91,31 @@ def create_account():
     upload = SHEET.worksheet('username')
     upload.append_row([username, hash1, score])
     welcome()
+
+
+def username_check(username):
+    try:
+        [str(username) for username in username]
+        if len(username) < 3:
+            raise ValueError(f"error")
+        if len(username) > 10:
+            raise ValueError(f"error")
+        if any(char.isdigit() for char in username):
+            raise ValueError(f"error")
+        else:
+            return True
+
+    except ValueError as e:
+        """
+        e variable is standard python short and for error
+        """
+        print(f"Invalid username: {e}, it must contain 3 to 10 characters and no numbers\n")
+        return False 
+        """ if the error occurs return false"""
+
+
+    return True
+    """ If the try works and data valied return true"""
 
 
 def login(input_username, auth_hash):
