@@ -50,26 +50,57 @@ def welcome():
         sleep(3)
         welcome()
 
+def username_check(username):
+    try:
+        [str(username) for username in username]
+        if len(username) != 6:
+            raise ValueError(f"error")
+
+    except ValueError as e:
+        """
+        e variable is standard python short and for error
+        """
+        print(f"Invalid data: {e}, please try again.\n")
+        return False 
+        """ if the error occurs return false"""
+
+
+    return True
+    """ If the try works and data valied return true"""
+        
+    #     len(username) < 3:
+    #     if username.isalpha():
+    #         return True
+    #     else:
+    #         return False
+    # else:
+    #     return False
+
+
 def create_account():
-    system('clear')
+    #system('clear')
     print(f.renderText('Create Account'))
     SHEET = GSPREAD_CLIENT.open('userdata')
     print("\nWelcome to account creation.\n")
     print("Please create a username between 3-10 characters and starts with any letter\n")
     username = input("Create a username: ").lower()
-    if len(username) < 3:
-        print("Username should be between 3 and 10 characters")
-        sleep(3)
+    if username_check(username) == False:
         create_account()
-    if any(char.isdigit() for char in username):
-        print("Username cannot contain numbers")
-        create_account()
-    elif len(username) > 10:
-        print("Username should be between 3 and 10 characters")
-        sleep(3)
-        create_account()
-    else:   
-        print("Username accepted")
+    else:
+        return True
+    # if len(username) < 3:
+    #     print("Username should be between 3 and 10 characters")
+    #     sleep(3)
+    #     create_account()
+    # if any(char.isdigit() for char in username):
+    #     print("Username cannot contain numbers")
+    #     create_account()
+    # elif len(username) > 10:
+    #     print("Username should be between 3 and 10 characters")
+    #     sleep(3)
+    #     create_account()
+    # else:   
+    #     print("Username accepted")
 
     print("Please create a password starting with any letter")
     password = maskpass.askpass("\nCreate a password: ")
@@ -87,6 +118,7 @@ def create_account():
     upload = SHEET.worksheet('username')
     upload.append_row([username, hash1, score])
     welcome()
+
 
 def login(input_username, auth_hash):
     data = SHEET.worksheet('username')
