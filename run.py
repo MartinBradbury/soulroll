@@ -173,6 +173,14 @@ def leaderboard():
 
 
 def deathroll():
+    """
+    This function clears the terminal and prints the heading for the game. Below the heading
+    the rules of the game are printed to the terminal. The users are asked to type
+    'roll' to start the game. If roll is typed correctly the game will begin and the 
+    random_num function is called. If they do not type roll correctly they are informed
+    what they need to type again and their error, a pause for 3 seconds and then the 
+    deathroll function is called again.
+    """
     system('clear')
     print(f.renderText('Welcome to Deathroll\n'))
     print("In this game you will play against the Lich King!")
@@ -188,6 +196,7 @@ def deathroll():
         print("please type roll to start the game")
         sleep(3)
         deathroll()
+
 
 def random_num(new_score, input_username):
     system('clear')
