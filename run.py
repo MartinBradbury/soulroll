@@ -228,11 +228,16 @@ def random_num(new_score, input_username):
             break
     return new_score
 
+
 def clear():
+    """
+    This function when called clears the terminal in both mac and linux OS and windows OS
+    """
    # for windows
         system('cls')
    # for mac and linux
         system('clear')
+
 
 def get_current_score(input_username):
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
@@ -246,6 +251,7 @@ def get_current_score(input_username):
             print(f"Hello {username}! your current score is {score}")
             input("Press the return key to continue")
             return score
+
 
 def update_score(input_username, donna):
     #open worksheet and sheet1
@@ -262,6 +268,7 @@ def update_score(input_username, donna):
         if username == input_username:
             SHEET.update_cell(i, column_headers.index('score') + 1, value_to_update)
             return update_score
+
 
 def main():
     system('clear')
