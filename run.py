@@ -53,36 +53,33 @@ def welcome():
 def username_check(username):
     try:
         [str(username) for username in username]
-        if len(username) != 6:
+        if len(username) < 3:
             raise ValueError(f"error")
+        if len(username) > 10:
+            raise ValueError(f"error")
+        if any(char.isdigit() for char in username):
+            raise ValueError(f"error")
+        else:
+            return True
 
     except ValueError as e:
         """
         e variable is standard python short and for error
         """
-        print(f"Invalid data: {e}, please try again.\n")
+        print(f"Invalid username: {e}, it must contain 3 to 10 characters and no numbers\n")
         return False 
         """ if the error occurs return false"""
 
 
     return True
     """ If the try works and data valied return true"""
-        
-    #     len(username) < 3:
-    #     if username.isalpha():
-    #         return True
-    #     else:
-    #         return False
-    # else:
-    #     return False
-
 
 def create_account():
     #system('clear')
     print(f.renderText('Create Account'))
     SHEET = GSPREAD_CLIENT.open('userdata')
     print("\nWelcome to account creation.\n")
-    print("Please create a username between 3-10 characters and starts with any letter\n")
+    print("Please create a username between 3-10 characters and only letters\n")
     username = input("Create a username: ").lower()
     if username_check(username) == False:
         create_account()
