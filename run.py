@@ -32,6 +32,12 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('userdata')
 
 def welcome():
+    """
+    This function is ran when the terminal loads. It ensures there is a clear terminal
+    and prints the title for the game. It gives the user a list of options to 
+    select which have been stored in a dictionary. Once user has selected an option,
+    the will see a print message saying initilising and a 3 second pause.
+    """
     clear()
     print(f.renderText('  Warcraft'))
     print(f.renderText('mini-games'))
@@ -50,8 +56,20 @@ def welcome():
         sleep(3)
         welcome()
 
+
 def create_account():
-    #system('clear')
+    """
+    This function clears the current terminal and displays the heading 'create account'.
+    it opens the google sheet data 'userdata' and asks the user to input a username.
+    A message is printed detailing the requirements of the username. The username is converted
+    to lower case and sent through to username check function. 
+    if returned True from username check a message prints to inform the user it is accepted. 
+    Users are then asked to create a password and verify the password. The password is hidden
+    when typed using maskpass and encoded. A score of 0 is declared to the new user and 
+    the accepted username and encoded password is written to google sheets along with their
+    score of 0. Users are then sent to the welcome function.
+    """
+    system('clear')
     print(f.renderText('Create Account'))
     SHEET = GSPREAD_CLIENT.open('userdata')
     print("\nWelcome to account creation.\n")
@@ -61,20 +79,6 @@ def create_account():
         create_account()
     else:
         print("username accepted")
-    # if len(username) < 3:
-    #     print("Username should be between 3 and 10 characters")
-    #     sleep(3)
-    #     create_account()
-    # if any(char.isdigit() for char in username):
-    #     print("Username cannot contain numbers")
-    #     create_account()
-    # elif len(username) > 10:
-    #     print("Username should be between 3 and 10 characters")
-    #     sleep(3)
-    #     create_account()
-    # else:   
-    #     print("Username accepted")
-
     print("Please create a password starting with any letter")
     password = maskpass.askpass("\nCreate a password: ")
     password_check = maskpass.askpass("\nRe-enter password ")
@@ -94,6 +98,15 @@ def create_account():
 
 
 def username_check(username):
+    """
+    This function is called from the create account function. It checks the username 
+    entered by the user to make sure it is between 3 and 10 characters and contains
+    no numbers. If the username does not meet this creteria a valueerror is raised
+    with a print statement reminding the user of the username requirements. This remains
+    on the screen for 3 seconds before the create account function is called again. If the
+    username is accepted no value error is raised and True is returned sending the user back 
+    to the create account function where they will not create a password.
+    """
     try:
         [str(username) for username in username]
         if len(username) < 3:
@@ -104,18 +117,12 @@ def username_check(username):
             raise ValueError(f"error")
         else:
             return True
-
     except ValueError as e:
-        """
-        e variable is standard python short and for error
-        """
         print(f"Invalid username: {e}, it must contain 3 to 10 characters and no numbers\n")
+        sleep(3)
         return False 
-        """ if the error occurs return false"""
-
-
     return True
-    """ If the try works and data valied return true"""
+    
 
 
 def login(input_username, auth_hash):
