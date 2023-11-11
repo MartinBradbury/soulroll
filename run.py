@@ -29,9 +29,6 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('userdata')
 
 
-
-
-
 def banner():
     """
     This function is ran when the terminal loads. It ensures there is a
@@ -129,7 +126,7 @@ def username_check(username):
             print("username exists")
             sleep(2)
             create_account()
-        else:    
+        else:
             try:
                 [str(username) for username in username]
                 if len(username) < 3:
@@ -138,7 +135,6 @@ def username_check(username):
                     raise ValueError(f"error")
                 if any(char.isdigit() for char in username):
                     raise ValueError(f"error")
-        
             except ValueError as e:
                 print(f"Invalid username: {e},")
                 print("It must contain 3 to 10 characters and no numbers\n")
@@ -163,7 +159,8 @@ def user_authentication(input_username, auth_hash):
     usr = data.get_all_records()
     match = False
     for record in usr:
-        if record['username'] == input_username and record['password'] == auth_hash:
+        if (record['username'] == input_username
+                and record['password'] == auth_hash):
             match = True
             break
     if match:
@@ -235,11 +232,6 @@ def deathroll():
     print("The fate of all Azeroth is in your hards")
     print("\nAre your ready for this challenge?\n")
 
-    # print("\n You will take turns to roll a number between 1 - 100")
-    # print("your next roll will be between 1 - the number YOU rolled")
-    # print("You keep taking it in turns until your or the Lick King rolles a 1")
-    # print("This a game of chance and the object is to not roll 1\n")
-    # print("To start the game, please type roll\n")
     accept = input("Please sign 'accept' to begin: ")
     if accept.lower() == 'accept':
         True
@@ -289,6 +281,7 @@ def print_letters(text):
     for letters in text:
         print(letters, end='', flush=True)
         time.sleep(0.1)
+
 
 def clear():
     """
@@ -345,8 +338,6 @@ def update_score(input_username, add_score):
             return update_score
 
 
-
-
 def main():
     """
     This function clears the terminal. It is ran when the user
@@ -399,6 +390,7 @@ def main():
             print("invalid choice")
     else:
         print("incorrect")
+
 
 banner_select = dict({
     "1": main,
