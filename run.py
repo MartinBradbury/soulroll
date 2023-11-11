@@ -84,7 +84,7 @@ def create_account():
     print("Please create your username")
     print("It should contain 3-10 characters")
     print("It should not contain any numbers\n")
-    username = input("Create a username: ").lower()
+    username = input("Create a username: ")
     if username_check(username) is False:
         create_account()
     else:
@@ -358,8 +358,8 @@ def main():
     system('clear')
     print(f.renderText('Login'))
     print("\nWelcome Adventurer,\n")
-    input_username = input("Please enter your username: ").lower()
-    input_password = maskpass.askpass("\nPlease enter your password: ").lower()
+    input_username = input("Please enter your username: ")
+    input_password = maskpass.askpass("\nPlease enter your password: ")
     auth = input_password.encode()
     auth_hash = hashlib.md5(auth).hexdigest()
     user_authentication(input_username, auth_hash)
