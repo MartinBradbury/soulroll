@@ -1,22 +1,16 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
-
-#google gsperad pip3 install gspread google-auth
-
 import gspread
 from google.oauth2.service_account import Credentials
 import random
 import hashlib
 import maskpass
-#pip install maskpass
+# pip install maskpass
 from os import system
-#to clear screen
+# to clear screen
 from pyfiglet import Figlet
-#pip3 install pyfiglet
+# pip3 install pyfiglet
 from time import sleep
-#time sleep
-import pandas as pd 
+# time sleep
+import pandas as pd
 
 f = Figlet(font='slant')
 
@@ -31,12 +25,14 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('userdata')
 
+
 def welcome():
     """
-    This function is ran when the terminal loads. It ensures there is a clear terminal
-    and prints the title for the game. It gives the user a list of options to 
-    select which have been stored in a dictionary. Once user has selected an option,
-    the will see a print message saying initilising and a 3 second pause.
+    This function is ran when the terminal loads. It ensures there is a
+    clear terminal and prints the title for the game. It gives
+    the user a list of options to select which have been stored in
+    a dictionary. Once user has selected an option, the will see
+    a print message saying initilising and a 3 second pause.
     """
 
     clear()
@@ -60,15 +56,19 @@ def welcome():
 
 def create_account():
     """
-    This function clears the current terminal and displays the heading 'create account'.
-    it opens the google sheet data 'userdata' and asks the user to input a username.
-    A message is printed detailing the requirements of the username. The username is converted
-    to lower case and sent through to username check function. 
-    if returned True from username check a message prints to inform the user it is accepted. 
-    Users are then asked to create a password and verify the password. The password is hidden
-    when typed using maskpass and encoded. A score of 0 is declared to the new user and 
-    the accepted username and encoded password is written to google sheets along with their
-    score of 0. Users are then sent to the welcome function.
+    This function clears the current terminal and displays the
+    heading 'create account'. It opens the google sheet data
+    'userdata' and asks the user to input a username.
+    A message is printed detailing the requirements of the username.
+    The username is converted to lower case and sent through to
+    username check function. If returned True from username check
+    a message prints to inform the user it is accepted.
+    Users are then asked to create a password and verify the
+    password. The password is hidden when typed using maskpass
+    and encoded. A score of 0 is declared to the new user and
+    the accepted username and encoded password is written
+    to google sheets along with their score of 0.
+    Users are then sent to the welcome function.
     """
 
     system('clear')
@@ -79,11 +79,11 @@ def create_account():
     print("It should contain 3-10 characters")
     print("It should not contain any numbers\n")
     username = input("Create a username: ").lower()
-    if username_check(username) == False:
+    if username_check(username) is False:
         create_account()
     else:
         print("username accepted")
-    print("Please create a password starting with any letter")
+    print("Please create a password")
     password = maskpass.askpass("\nCreate a password: ")
     password_check = maskpass.askpass("\nRe-enter password ")
     if password == password_check:
@@ -102,13 +102,16 @@ def create_account():
 
 def username_check(username):
     """
-    This function is called from the create account function. It checks the username 
-    entered by the user to make sure it is between 3 and 10 characters and contains
-    no numbers. If the username does not meet this creteria a valueerror is raised
-    with a print statement reminding the user of the username requirements. This remains
-    on the screen for 3 seconds before the create account function is called again. If the
-    username is accepted no value error is raised and True is returned sending the user back 
-    to the create account function where they will not create a password.
+    This function is called from the create account
+    function. It checks the username entered by the user
+    to make sure it is between 3 and 10 characters and contains
+    no numbers. If the username does not meet this creteria
+    a valueerror is raised with a print statement reminding the
+    user of the username requirements. This remains on the screen
+    for 3 seconds before the create account function is called again.
+    If the username is accepted no value error is raised and True
+    is returned sending the user back to the create account function
+    where they will not create a password.
     """
 
     try:
@@ -122,20 +125,23 @@ def username_check(username):
         else:
             return True
     except ValueError as e:
-        print(f"Invalid username: {e}, it must contain 3 to 10 characters and no numbers\n")
+        print(f"Invalid username: {e},")
+        print("It must contain 3 to 10 characters and no numbers\n")
         sleep(3)
-        return False 
+        return False
     return True
-    
+
 
 def login(input_username, auth_hash):
     """
-    This function take the username input and password input from the main function.
-    It opens google sheet userdata and gets all records. It looks through the records
-    to find a match for the username input and password input. If a match is found the loop
-    is broken and returned to the main function after a pause where the terminal displays
-    logging in and login successful. If no match is found the user is returned to the 
-    welcome function.
+    This function take the username input and password input
+    from the main function. It opens google sheet userdata
+    and gets all records. It looks through the records
+    to find a match for the username input and password input.
+    If a match is found the loop is broken and returned to the
+    main function after a pause where the terminal displays
+    logging in and login successful. If no match is found the
+    user is returned to the welcome function.
     """
 
     data = SHEET.worksheet('username')
@@ -144,7 +150,7 @@ def login(input_username, auth_hash):
     for record in usr:
         if record['username'] == input_username and record['password'] == auth_hash:
             match = True
-            break       
+            break
     if match:
         print("Logging in.....")
         sleep(3)
@@ -158,13 +164,16 @@ def login(input_username, auth_hash):
 
 def leaderboard():
     """
-    This function is selected from the welcome function. It clears the terminal and opens
-    the google sheet userdata. It gets all records from the sheet and stores it as a 
-    pandas dataframe. It arranges the data from by the score column in the google sheet
-    from highest to lowers. The heading leaderboard is printed to the terminal. Only the 
-    usernames and scores are printed to the terminal from highest to lowers and 
-    the index removed. The is a 5 second delay and then a print statment appers under the
-    dataframe informing the user to press enter to continue to the welcome function.  
+    This function is selected from the welcome function.
+    It clears the terminal and opens the google sheet userdata.
+    It gets all records from the sheet and stores it as a
+    pandas dataframe. It arranges the data from by the score
+    column in the google sheet from highest to lowers.
+    The heading leaderboard is printed to the terminal. Only the
+    usernames and scores are printed to the terminal from highest
+    to lowers and the index removed. The is a 5 second delay and
+    then a print statment appers under the dataframe informing the
+    user to press enter to continue to the welcome function.
     """
 
     clear()
@@ -181,12 +190,14 @@ def leaderboard():
 
 def deathroll():
     """
-    This function clears the terminal and prints the heading for the game. Below the heading
-    the rules of the game are printed to the terminal. The users are asked to type
-    'roll' to start the game. If roll is typed correctly the game will begin and the 
-    random_num function is called. If they do not type roll correctly they are informed
-    what they need to type again and their error, a pause for 3 seconds and then the 
-    deathroll function is called again.
+    This function clears the terminal and prints the heading
+    for the game. Below the heading the rules of the game are
+    printed to the terminal. The users are asked to type
+    'roll' to start the game. If roll is typed correctly
+    the game will begin and the random_num function is called.
+    If they do not type roll correctly they are informed what they
+    need to type again and their error, a pause for 3 seconds
+    and then the deathroll function is called again.
     """
 
     system('clear')
@@ -228,7 +239,7 @@ def random_num(new_score, input_username):
             break
         input("press any key for computer roll\n")
         number2 = random.randint(1, 1)
-        print(f"the computer rolled: {1}\n")   
+        print(f"the computer rolled: {1}\n")
         if (number2 == 1):
             print("The Lich King lost")
             print("Congratulations YOU won!")
@@ -240,7 +251,8 @@ def random_num(new_score, input_username):
 
 def clear():
     """
-    This function when called clears the terminal in both mac and linux OS and windows OS
+    This function when called clears the terminal in both
+    mac and linux OS and windows OS
     """
 
     # for windows
@@ -251,10 +263,11 @@ def clear():
 
 def get_current_score(input_username):
     """
-    This function is called from the main function. It opens the google spreadsheet 
-    userdata and checks the username input for the login and prints their current score.
-    There is an input of enter so the user has time to see their current score before
-    moveing on.
+    This function is called from the main function. It opens
+    the google spreadsheet userdata and checks the username
+    input for the login and prints their current score.
+    There is an input of enter so the user has time to
+    see their current score before moveing on.
     """
 
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
@@ -272,12 +285,11 @@ def get_current_score(input_username):
 
 def update_score(input_username, add_score):
     """
-    This function updates the user score after each random_num played. It opens the
-    google sheet userdata, finds the correct user and updates their score. It then
-    returns the data update_score.
+    This function updates the user score after each random_num played.
+    It opens the google sheet userdata, finds the correct user and
+    updates their score. It then returns the data update_score.
     """
 
-    
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
     column_headers = SHEET.row_values(1)
     username_index = column_headers.index('username') + 1
@@ -292,15 +304,18 @@ def update_score(input_username, add_score):
 
 def main():
     """
-    This function clears the terminal. It is ran when the user selects login from the 
-    welcome function. It prints log in and asks the user to input their username and
-    password. The login function is ran with the data inputed by the user and if true
-    the get_current_score function is ran. The returned value is converted into an int
-    and then the deathrol function is ran. when the deathroll function is complete the
-    randon_num function is ran using the new_score and input_username data. After the 
-    random_num has completed the update _score function is ran to update the users
-    score. The user is asked if they want to play again, if yes is selected the 
-    game restarts with their new score, if no is selected the welcome function is ran.
+    This function clears the terminal. It is ran when the user
+    selects login from the welcome function. It prints log in and
+    asks the user to input their username and password. The login
+    function is ran with the data inputed by the user and if true
+    the get_current_score function is ran. The returned value is
+    converted into an int and then the deathrol function is ran.
+    when the deathroll function is complete the randon_num function
+    is ran using the new_score and input_username data. After the
+    random_num has completed the update _score function is ran to
+    update the users score. The user is asked if they want to play
+    again, if yes is selected the game restarts with their new score,
+    if no is selected the welcome function is ran.
     checks are present to make sure the user selects y or n.
     """
 
@@ -326,7 +341,7 @@ def main():
         response = input("Please select (y/n): ").lower()
         if response == 'y':
             print("game restarting.......")
-            sleep(5) 
+            sleep(5)
             score = get_current_score(input_username)
             new_score = int(score)
             test_score = random_num(new_score, input_username)
@@ -350,10 +365,3 @@ welcome_select = dict({
 
 welcome()
 main()
-
-
-
-
-
-
-
