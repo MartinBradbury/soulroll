@@ -120,22 +120,28 @@ def username_check(username):
     is returned sending the user back to the create account function
     where they will not create a password.
     """
-
-    try:
-        [str(username) for username in username]
-        if len(username) < 3:
-            raise ValueError(f"error")
-        if len(username) > 10:
-            raise ValueError(f"error")
-        if any(char.isdigit() for char in username):
-            raise ValueError(f"error")
-        else:
-            return True
-    except ValueError as e:
-        print(f"Invalid username: {e},")
-        print("It must contain 3 to 10 characters and no numbers\n")
-        sleep(3)
-        return False
+    data = SHEET.worksheet('username')
+    usr = data.get_all_records()
+    for record in usr:
+        if record['username'] == username:
+            print("username exists")
+            sleep(2)
+            create_account()
+        else:    
+            try:
+                [str(username) for username in username]
+                if len(username) < 3:
+                    raise ValueError(f"error")
+                if len(username) > 10:
+                    raise ValueError(f"error")
+                if any(char.isdigit() for char in username):
+                    raise ValueError(f"error")
+        
+            except ValueError as e:
+                print(f"Invalid username: {e},")
+                print("It must contain 3 to 10 characters and no numbers\n")
+                sleep(3)
+                return False
     return True
 
 
