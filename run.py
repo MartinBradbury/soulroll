@@ -45,7 +45,9 @@ def welcome():
     print("[4] exit")
     selection = input("What would you like to do?: ")
     if selection in welcome_select.keys():
-        print(f"You selected option {selection}, initilising.....")
+        clear()
+        print(f"\nYou selected option {selection}\n")
+        print("initilising.....\n")
         sleep(3)
         return welcome_select[selection]()
     else:
@@ -152,7 +154,7 @@ def login(input_username, auth_hash):
             match = True
             break
     if match:
-        print("Logging in.....")
+        print("\nLogging in.....\n")
         sleep(3)
         print("Login Successful")
         sleep(1)
@@ -202,17 +204,36 @@ def deathroll():
 
     system('clear')
     print(f.renderText('Welcome to Deathroll\n'))
-    print("In this game you will play against the Lich King!")
-    print("\n You will take turns to roll a number between 1 - 100")
-    print("your next roll will be between 1 - the number YOU rolled")
-    print("You keep taking it in turns until your or the Lick King rolles a 1")
-    print("This a game of chance and the object is to not roll 1\n")
-    print("To start the game, please type roll\n")
-    roll = input(": ")
-    if roll.lower() == 'roll':
+    print("Reining supreme in his icy citadel in Northern")
+    print("the Lich King continues to consume innocent souls.")
+    print("Any soul claimed by the Lich King would never be able")
+    print("to leave as they become forever enthralled by his grasp.")
+    print("These souls become lich spirits and destined to")
+    print("serve him for all eternity.")
+    sleep(2)
+    print("\nUntil now……….\n")
+    sleep(2)
+    print("Mighty champion")
+    print("you have been entrusted with innocent souls to challenge")
+    print("the Lich King")
+    print("Will you be able to defeat him and return the innocent")
+    print("souls back to their true resting place")
+    print("The fate of all Azeroth is in your hards")
+    print("\nAre your ready for this challenge?\n")
+
+
+
+
+    # print("\n You will take turns to roll a number between 1 - 100")
+    # print("your next roll will be between 1 - the number YOU rolled")
+    # print("You keep taking it in turns until your or the Lick King rolles a 1")
+    # print("This a game of chance and the object is to not roll 1\n")
+    # print("To start the game, please type roll\n")
+    accept = input("Please sign 'accept' to begin: ")
+    if accept.lower() == 'accept':
         True
     else:
-        print("please type roll to start the game")
+        print("please type 'accept' to begin.")
         sleep(3)
         deathroll()
 
@@ -278,8 +299,8 @@ def get_current_score(input_username):
         if username == input_username:
             score = SHEET.cell(i, column_headers.index('score') + 1).value
             system('clear')
-            print(f"Hello {username}! your current score is {score}")
-            input("Press the return key to continue")
+            print(f"Well met {username}! your current score is {score}\n")
+            input("\nPress the return key to continue")
             return score
 
 
@@ -321,9 +342,9 @@ def main():
 
     system('clear')
     print(f.renderText('Login'))
-    print("\nWelcome Traveller,\n")
+    print("\nWelcome Adventurer,\n")
     input_username = input("Please enter your username: ").lower()
-    input_password = maskpass.askpass("\nPlease enter your password: \n").lower()
+    input_password = maskpass.askpass("\nPlease enter your password: ").lower()
     auth = input_password.encode()
     auth_hash = hashlib.md5(auth).hexdigest()
     login(input_username, auth_hash)
