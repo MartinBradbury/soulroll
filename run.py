@@ -12,7 +12,8 @@ from time import sleep
 # time sleep
 import pandas as pd
 import sys
-
+import os
+import time
 
 f = Figlet(font='slant')
 
@@ -29,7 +30,16 @@ SHEET = GSPREAD_CLIENT.open('userdata')
 
 
 
+def get_terminal_size():
+    terminal_size = os.get_terminal_size()
+    return terminal_size.columns, terminal_size.lines
 
+def center_print(text):
+    columns, lines = get_terminal_size()
+    left_margin = (columns - len(text)) // 2
+    sys.stdout.write("\x1b[%d;%dH" % (lines//2, left_margin))
+    sys.stdout.write(text)
+    sys.stdout.flush()
 
 def banner():
     """
@@ -39,7 +49,8 @@ def banner():
     a dictionary. Once user has selected an option, the will see
     a print message saying initilising and a 3 second pause.
     """
-
+  
+    
     clear()
     print(f.renderText('  Warcraft'))
     print(f.renderText('mini-games'))
@@ -50,14 +61,14 @@ def banner():
     print("[4] exit")
     selection = input("What would you like to do?: ")
     if selection in banner_select.keys():
-        clear()
+        initilising = "initilising. . . . . . .\n"
         print(f"\nYou selected option {selection}\n")
-        print("initilising.....\n")
-        sleep(3)
+        print_letters(initilising)
+        sleep(1)
         return banner_select[selection]()
     else:
         print("\nIncorrect selection, please try again")
-        sleep(3)
+        sleep(2)
         banner()
 
 
@@ -99,7 +110,7 @@ def create_account():
         hash1 = hashlib.md5(enc).hexdigest()
     else:
         print("Passwords do not match")
-        sleep(3)
+        sleep(2)
         create_account()
     score = 0
     upload = SHEET.worksheet('username')
@@ -134,7 +145,7 @@ def username_check(username):
     except ValueError as e:
         print(f"Invalid username: {e},")
         print("It must contain 3 to 10 characters and no numbers\n")
-        sleep(3)
+        sleep(2)
         return False
     return True
 
@@ -157,17 +168,20 @@ def user_authentication(input_username, auth_hash):
     for record in usr:
         if record['username'] == input_username and record['password'] == auth_hash:
             match = True
-            break
+        break
     if match:
-        print("\nLogging in.....\n")
-        sleep(3)
-        print("Login Successful")
+        logging_in = "\nLogging in . . . . . . .\n"
+        success = "Login Successful"
+        print_letters(logging_in)
+        sleep(1)
+        print_letters(success)
         sleep(1)
 
     else:
-        print("Incorrect username or password. Please try again")
-        sleep(3)
-        main()
+        print("Incorrect username or password")
+        sleep(2)
+        banner()
+                
 
 
 def leaderboard():
@@ -191,10 +205,19 @@ def leaderboard():
     df = df.sort_values(by='score', ascending=False)
     print(f.renderText('Leaderboard'))
     print(df.to_string(columns=['username', 'score'], index=False))
-    sleep(5)
+    sleep(1)
     input("\nPress enter to return to main menu")
     banner()
 
+
+def print_letters(text):
+    """
+    prints each letter in turn with a 0.1s delay
+    """
+
+    for letter in text:
+        print(letter, end='', flush=True)
+        time.sleep(0.1)
 
 def deathroll():
     """
@@ -210,35 +233,32 @@ def deathroll():
 
     system('clear')
     print(f.renderText('Welcome to Deathroll\n'))
-    print("Reining supreme in his icy citadel in Northern")
-    print("the Lich King continues to consume innocent souls.")
-    print("Any soul claimed by the Lich King would never be able")
-    print("to leave as they become forever enthralled by his grasp.")
-    print("These souls become lich spirits and destined to")
-    print("serve him for all eternity.")
-    sleep(2)
-    print("\nUntil now……….\n")
-    sleep(2)
-    print("Mighty champion")
-    print("you have been entrusted with innocent souls to challenge")
-    print("the Lich King")
-    print("Will you be able to defeat him and return the innocent")
-    print("souls back to their true resting place")
-    print("The fate of all Azeroth is in your hards")
-    print("\nAre your ready for this challenge?\n")
-
+    storyline = """
+    Reining supreme in his icy citadel in Northern
+    the Lich King continues to consume innocent souls.\n
+    Any soul claimed by the Lich King would never be able
+    to leave as they become forever enthralled by his grasp.\n
+    These souls become lich spirits and destined to
+    serve him for all eternity.
+    
+    Until now.   .   .   .   .   .   .
+    
+    Mighty champion\n
+    you have been entrusted with innocent souls to challenge
+    the Lich King.\n
+    Will you be able to defeat him and return the innocent
+    souls back to their true resting place
+    The fate of all Azeroth is in your hards.\n
+    Are your ready for this challenge?\n
+    """
+    print_letters(storyline)
     # print("\n You will take turns to roll a number between 1 - 100")
     # print("your next roll will be between 1 - the number YOU rolled")
     # print("You keep taking it in turns until your or the Lick King rolles a 1")
     # print("This a game of chance and the object is to not roll 1\n")
     # print("To start the game, please type roll\n")
-    accept = input("Please sign 'accept' to begin: ")
-    if accept.lower() == 'accept':
-        True
-    else:
-        print("please type 'accept' to begin.")
-        sleep(3)
-        deathroll()
+    input("Please press return to read the rules")
+    system('clear')
 
 
 def random_num(new_score, input_username):
@@ -304,7 +324,7 @@ def get_current_score(input_username):
             score = SHEET.cell(i, column_headers.index('score') + 1).value
             system('clear')
             print(f"Well met {username}! your current score is {score}\n")
-            input("\nPress the return key to continue")
+            input("\nPress the return key to begin the story")
             return score
 
 
@@ -330,7 +350,7 @@ def update_score(input_username, add_score):
 
 
 
-def main():
+def login():
     """
     This function clears the terminal. It is ran when the user
     selects login from the welcome function. It prints log in and
@@ -363,13 +383,14 @@ def main():
     sleep(1)
     add_score = test_score
     update_score(input_username, add_score)
-    sleep(10)
+    sleep(3)
     while True:
         print("would you like to play again?")
         response = input("Please select (y/n): ").lower()
         if response == 'y':
-            print("game restarting.......")
-            sleep(5)
+            game_restart = "Game Restarting . . . . . . "
+            print_letters(game_restart)
+            sleep(3)
             score = get_current_score(input_username)
             new_score = int(score)
             test_score = random_num(new_score, input_username)
@@ -384,15 +405,15 @@ def main():
         print("incorrect")
 
 banner_select = dict({
-    "1": main,
+    "1": login,
     "2": create_account,
     "3": leaderboard,
-    "4": exit
+    "4": banner
 })
 
 
 banner()
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__login__":
+    login()
