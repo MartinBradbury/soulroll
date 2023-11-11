@@ -13,6 +13,7 @@ from time import sleep
 import pandas as pd
 import sys
 
+
 f = Figlet(font='slant')
 
 SCOPE = [
@@ -27,7 +28,10 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('userdata')
 
 
-def welcome():
+
+
+
+def banner():
     """
     This function is ran when the terminal loads. It ensures there is a
     clear terminal and prints the title for the game. It gives
@@ -45,16 +49,16 @@ def welcome():
     print("[3] Leaderboard")
     print("[4] exit")
     selection = input("What would you like to do?: ")
-    if selection in welcome_select.keys():
+    if selection in banner_select.keys():
         clear()
         print(f"\nYou selected option {selection}\n")
         print("initilising.....\n")
         sleep(3)
-        return welcome_select[selection]()
+        return banner_select[selection]()
     else:
         print("\nIncorrect selection, please try again")
         sleep(3)
-        welcome()
+        banner()
 
 
 def create_account():
@@ -100,7 +104,7 @@ def create_account():
     score = 0
     upload = SHEET.worksheet('username')
     upload.append_row([username, hash1, score])
-    welcome()
+    banner()
 
 
 def username_check(username):
@@ -135,7 +139,7 @@ def username_check(username):
     return True
 
 
-def login(input_username, auth_hash):
+def user_authentication(input_username, auth_hash):
     """
     This function take the username input and password input
     from the main function. It opens google sheet userdata
@@ -159,10 +163,11 @@ def login(input_username, auth_hash):
         sleep(3)
         print("Login Successful")
         sleep(1)
+
     else:
         print("Incorrect username or password. Please try again")
         sleep(3)
-        welcome()
+        main()
 
 
 def leaderboard():
@@ -188,7 +193,7 @@ def leaderboard():
     print(df.to_string(columns=['username', 'score'], index=False))
     sleep(5)
     input("\nPress enter to return to main menu")
-    welcome()
+    banner()
 
 
 def deathroll():
@@ -323,6 +328,8 @@ def update_score(input_username, add_score):
             return update_score
 
 
+
+
 def main():
     """
     This function clears the terminal. It is ran when the user
@@ -347,7 +354,7 @@ def main():
     input_password = maskpass.askpass("\nPlease enter your password: ").lower()
     auth = input_password.encode()
     auth_hash = hashlib.md5(auth).hexdigest()
-    login(input_username, auth_hash)
+    user_authentication(input_username, auth_hash)
     score = get_current_score(input_username)
     new_score = int(score)
     sleep(1)
@@ -370,19 +377,22 @@ def main():
             update_score(input_username, add_score)
         elif response == 'n':
             print("Thankyou for playing!")
-            welcome()
+            banner()
         else:
             print("invalid choice")
     else:
         print("incorrect")
 
-
-welcome_select = dict({
+banner_select = dict({
     "1": main,
     "2": create_account,
     "3": leaderboard,
     "4": exit
 })
 
-welcome()
-main()
+
+banner()
+
+
+if __name__ == "__main__":
+    main()
