@@ -38,6 +38,7 @@ def welcome():
     select which have been stored in a dictionary. Once user has selected an option,
     the will see a print message saying initilising and a 3 second pause.
     """
+
     clear()
     print(f.renderText('  Warcraft'))
     print(f.renderText('mini-games'))
@@ -69,11 +70,14 @@ def create_account():
     the accepted username and encoded password is written to google sheets along with their
     score of 0. Users are then sent to the welcome function.
     """
+
     system('clear')
     print(f.renderText('Create Account'))
     SHEET = GSPREAD_CLIENT.open('userdata')
     print("\nWelcome to account creation.\n")
-    print("Please create a username between 3-10 characters and only letters\n")
+    print("Please create your username")
+    print("It should contain 3-10 characters")
+    print("It should not contain any numbers\n")
     username = input("Create a username: ").lower()
     if username_check(username) == False:
         create_account()
@@ -106,6 +110,7 @@ def username_check(username):
     username is accepted no value error is raised and True is returned sending the user back 
     to the create account function where they will not create a password.
     """
+
     try:
         [str(username) for username in username]
         if len(username) < 3:
@@ -132,6 +137,7 @@ def login(input_username, auth_hash):
     logging in and login successful. If no match is found the user is returned to the 
     welcome function.
     """
+
     data = SHEET.worksheet('username')
     usr = data.get_all_records()
     match = False
@@ -160,6 +166,7 @@ def leaderboard():
     the index removed. The is a 5 second delay and then a print statment appers under the
     dataframe informing the user to press enter to continue to the welcome function.  
     """
+
     clear()
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
     data = SHEET.get_all_records()
@@ -181,6 +188,7 @@ def deathroll():
     what they need to type again and their error, a pause for 3 seconds and then the 
     deathroll function is called again.
     """
+
     system('clear')
     print(f.renderText('Welcome to Deathroll\n'))
     print("In this game you will play against the Lich King!")
@@ -200,6 +208,7 @@ def deathroll():
 
 def random_num(new_score, input_username):
     system('clear')
+    print(new_score)
     print("rolling.........")
     sleep(1)
     number1 = random.randint(1, 100)
@@ -233,13 +242,21 @@ def clear():
     """
     This function when called clears the terminal in both mac and linux OS and windows OS
     """
-   # for windows
-        system('cls')
-   # for mac and linux
-        system('clear')
+
+    # for windows
+    system('cls')
+    # for mac and linux
+    system('clear')
 
 
 def get_current_score(input_username):
+    """
+    This function is called from the main function. It opens the google spreadsheet 
+    userdata and checks the username input for the login and prints their current score.
+    There is an input of enter so the user has time to see their current score before
+    moveing on.
+    """
+
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
     column_headers = SHEET.row_values(1)
     username_index = column_headers.index('username') + 1
@@ -253,15 +270,18 @@ def get_current_score(input_username):
             return score
 
 
-def update_score(input_username, donna):
-    #open worksheet and sheet1
+def update_score(input_username, add_score):
+    """
+    This function updates the user score after each random_num played. It opens the
+    google sheet userdata, finds the correct user and updates their score. It then
+    returns the data update_score.
+    """
+
+    
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
-    #assign a variable to row
     column_headers = SHEET.row_values(1)
-    #assign a variable to column headers in username +1 as index
     username_index = column_headers.index('username') + 1
-    #value to update
-    value_to_update = donna
+    value_to_update = add_score
     row_count = len(SHEET.get_all_values())
     for i in range(1, SHEET.row_count + 1):
         username = SHEET.cell(i, username_index).value
@@ -271,6 +291,19 @@ def update_score(input_username, donna):
 
 
 def main():
+    """
+    This function clears the terminal. It is ran when the user selects login from the 
+    welcome function. It prints log in and asks the user to input their username and
+    password. The login function is ran with the data inputed by the user and if true
+    the get_current_score function is ran. The returned value is converted into an int
+    and then the deathrol function is ran. when the deathroll function is complete the
+    randon_num function is ran using the new_score and input_username data. After the 
+    random_num has completed the update _score function is ran to update the users
+    score. The user is asked if they want to play again, if yes is selected the 
+    game restarts with their new score, if no is selected the welcome function is ran.
+    checks are present to make sure the user selects y or n.
+    """
+
     system('clear')
     print(f.renderText('Login'))
     print("\nWelcome Traveller,\n")
@@ -285,8 +318,8 @@ def main():
     deathroll()
     test_score = random_num(new_score, input_username)
     sleep(1)
-    donna = test_score
-    update_score(input_username, donna)
+    add_score = test_score
+    update_score(input_username, add_score)
     sleep(10)
     while True:
         print("would you like to play again?")
@@ -297,8 +330,8 @@ def main():
             score = get_current_score(input_username)
             new_score = int(score)
             test_score = random_num(new_score, input_username)
-            donna = test_score
-            update_score(input_username, donna)
+            add_score = test_score
+            update_score(input_username, add_score)
         elif response == 'n':
             print("Thankyou for playing!")
             welcome()
@@ -306,6 +339,8 @@ def main():
             print("invalid choice")
     else:
         print("incorrect")
+
+
 welcome_select = dict({
     "1": main,
     "2": create_account,
