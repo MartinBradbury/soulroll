@@ -11,6 +11,7 @@ from pyfiglet import Figlet
 from time import sleep
 # time sleep
 import pandas as pd
+import sys
 
 f = Figlet(font='slant')
 
@@ -18,7 +19,7 @@ SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
-    ]
+]
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
@@ -221,9 +222,6 @@ def deathroll():
     print("The fate of all Azeroth is in your hards")
     print("\nAre your ready for this challenge?\n")
 
-
-
-
     # print("\n You will take turns to roll a number between 1 - 100")
     # print("your next roll will be between 1 - the number YOU rolled")
     # print("You keep taking it in turns until your or the Lick King rolles a 1")
@@ -275,11 +273,12 @@ def clear():
     This function when called clears the terminal in both
     mac and linux OS and windows OS
     """
-
-    # for windows
-    system('cls')
-    # for mac and linux
-    system('clear')
+    if sys.platform.startswith('linux'):
+        # For Mac and Linux
+        system("clear")
+    else:
+        # For Windows
+        system("cls")
 
 
 def get_current_score(input_username):
@@ -319,7 +318,8 @@ def update_score(input_username, add_score):
     for i in range(1, SHEET.row_count + 1):
         username = SHEET.cell(i, username_index).value
         if username == input_username:
-            SHEET.update_cell(i, column_headers.index('score') + 1, value_to_update)
+            SHEET.update_cell(i, column_headers.index(
+                'score') + 1, value_to_update)
             return update_score
 
 
@@ -382,7 +382,7 @@ welcome_select = dict({
     "2": create_account,
     "3": leaderboard,
     "4": exit
-    })
+})
 
 welcome()
 main()
