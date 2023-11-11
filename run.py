@@ -12,6 +12,7 @@ from time import sleep
 # time sleep
 import pandas as pd
 import sys
+import time
 
 
 f = Figlet(font='slant')
@@ -50,9 +51,10 @@ def banner():
     print("[4] exit")
     selection = input("What would you like to do?: ")
     if selection in banner_select.keys():
+        initilising = "Initilising............\n"
         clear()
         print(f"\nYou selected option {selection}\n")
-        print("initilising.....\n")
+        print_letters(initilising)
         sleep(3)
         return banner_select[selection]()
     else:
@@ -278,6 +280,15 @@ def random_num(new_score, input_username):
             break
     return new_score
 
+
+def print_letters(text):
+    """
+    Print the letters in turn with a 0.1s delay
+    """
+
+    for letters in text:
+        print(letters, end='', flush=True)
+        time.sleep(0.1)
 
 def clear():
     """
