@@ -222,9 +222,9 @@ def random_num(new_score, input_username):
     print(new_score)
     print("rolling.........")
     sleep(1)
-    number1 = random.randint(1, 100)
+    number1 = random.randint(2, 100)
     print(f"\nyou rolled: {number1}")
-    number2 = random.randint(1, 100)
+    number2 = random.randint(2, 100)
     input("press any key for computer roll")
     print(f"the computer rolled: {number2}\n")
     while (number1 + number2 != 1):
@@ -238,8 +238,8 @@ def random_num(new_score, input_username):
             print(new_score)
             break
         input("press any key for computer roll\n")
-        number2 = random.randint(1, 1)
-        print(f"the computer rolled: {1}\n")
+        number2 = random.randint(1, number2)
+        print(f"the computer rolled: {number2}\n")
         if (number2 == 1):
             print("The Lich King lost")
             print("Congratulations YOU won!")
