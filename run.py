@@ -39,8 +39,8 @@ def banner():
     """
 
     clear()
-    print(f.renderText('  Warcraft'))
-    print(f.renderText('mini-games'))
+    print(f.renderText('       Warcraft'))
+    print(f.renderText('     mini-games'))
     print("Welcome")
     print("[1] Login")
     print("[2] create account")
@@ -100,7 +100,7 @@ def create_account():
         print("Passwords do not match")
         sleep(3)
         create_account()
-    score = 0
+    score = 20
     upload = SHEET.worksheet('username')
     upload.append_row([username, hash1, score])
     banner()
@@ -215,72 +215,93 @@ def deathroll():
 
     system('clear')
     print(f.renderText('Welcome to Deathroll\n'))
-    print("Reining supreme in his icy citadel in Northern")
-    print("the Lich King continues to consume innocent souls.")
-    print("Any soul claimed by the Lich King would never be able")
-    print("to leave as they become forever enthralled by his grasp.")
-    print("These souls become lich spirits and destined to")
-    print("serve him for all eternity.")
-    sleep(2)
-    print("\nUntil now……….\n")
-    sleep(2)
-    print("Mighty champion")
-    print("you have been entrusted with innocent souls to challenge")
-    print("the Lich King")
-    print("Will you be able to defeat him and return the innocent")
-    print("souls back to their true resting place")
-    print("The fate of all Azeroth is in your hards")
-    print("\nAre your ready for this challenge?\n")
+    story = """
+Reining supreme in his icy citadel in Northern
+the Lich King continues to consume innocent souls.
+Any soul claimed by the Lich King would never be able
+to leave as they become forever enthralled by his grasp.
+These souls become lich spirits and destined to
+serve him for all eternity.
 
-    accept = input("Please sign 'accept' to begin: ")
-    if accept.lower() == 'accept':
-        True
-    else:
-        print("please type 'accept' to begin.")
-        sleep(3)
-        deathroll()
+Until now. . . . . .
+
+Mighty champion
+you have been entrusted with innocent souls to challenge
+the Lich King
+Will you be able to defeat him and return the innocent
+souls back to their true resting place
+The fate of all Azeroth is in your hards
+Are your ready for this challenge?\n
+    """
+    print_letters(story)
+    input("\nPress return to continue to the rules")
+    system('clear')
+    print(f.renderText('Rules\n'))
+    print("* This is a random dice game of chance.\n")
+    print("* You will take it in turn to roll a random number")
+    print("  between 1 and 100.\n")
+    print("* Each roll after that will be between 1 and the number")
+    print("  you last rolled.\n")
+    print("* The aim of the game is to NOT roll number 1.\n")
+    input("Press return to continue")
+            
 
 
 def random_num(new_score, input_username):
     system('clear')
-    print(new_score)
-    print("rolling.........")
+    roll = input("Please type roll to start: ").lower()
+    if roll != "roll":
+        print("please type roll to begin")
+        random_num(new_score, input_username)
+    system('clear')
+    rolling = "Rolling . . . . . . .\n"
+    print_letters(rolling)
     sleep(1)
     number1 = random.randint(2, 100)
-    print(f"\nyou rolled: {number1}")
+    print(f"\nyou rolled: {number1}\n")
     number2 = random.randint(2, 100)
-    input("press any key for computer roll")
-    print(f"the computer rolled: {number2}\n")
+    sleep(2)
+    print("The Lich King is rolling\n")
+    print_letters(rolling)
+    sleep(1)
+    print(f"\nthe Lich King rolled: {number2}\n")
+    input("press return to keep rolling")
     while (number1 + number2 != 1):
-        input("press any key to roll again")
+        system('clear')
+        # input("press any key to roll again")
         number1 = random.randint(1, number1)
-        print(f"\nyou rolled: {number1}")
+        print_letters(rolling)
+        print(f"\nyou rolled: {number1}\n")
         if (number1 == 1):
             print("Oh no, the Lich King defeated you!")
-            print("Congratulations Lich King!")
-            new_score += 0
-            print(new_score)
+            print("You have lost a soul to the Lich King")
+            new_score -= 1
+            print(f"\n {input_username} you now have {new_score} souls\n")
             break
-        input("press any key for computer roll\n")
+        input("press any key for Lich Kings roll\n")
         number2 = random.randint(1, number2)
-        print(f"the computer rolled: {number2}\n")
+        print_letters(rolling)
+        sleep(1)
+        print(f"\nThe Lich King rolled: {number2}\n")
+        input("press return to keep rolling")
         if (number2 == 1):
             print("The Lich King lost")
             print("Congratulations YOU won!")
+            print("You have rescued one trapped soul")
             new_score += 1
-            print(f"Well done {input_username} your new score is {new_score}")
+            print(f"\nWell done {input_username} you now have {new_score} souls\n")
             break
     return new_score
 
 
 def print_letters(text):
     """
-    Print the letters in turn with a 0.1s delay
+    Print the letters in turn with a 0.05s delay
     """
 
     for letters in text:
         print(letters, end='', flush=True)
-        time.sleep(0.1)
+        time.sleep(0.05)
 
 
 def clear():
@@ -371,13 +392,13 @@ def main():
     sleep(1)
     add_score = test_score
     update_score(input_username, add_score)
-    sleep(10)
+    sleep(2)
     while True:
         print("would you like to play again?")
         response = input("Please select (y/n): ").lower()
         if response == 'y':
             print("game restarting.......")
-            sleep(5)
+            sleep(3)
             score = get_current_score(input_username)
             new_score = int(score)
             test_score = random_num(new_score, input_username)
