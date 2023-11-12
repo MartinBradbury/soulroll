@@ -214,7 +214,30 @@ def deathroll():
     """
 
     system('clear')
-    print(f.renderText('Welcome to Deathroll\n'))
+    castle = """
+
+       /\         /\                    .           /\
+      /  \       /  \                   |@>        /  \
+     /    \     / .  \                  |         /    \
+    /      \   /  |@> \       /\       / \       /      \
+   /     /\ \ /   |    \     /  \     /   \     /        \
+  /     /  \ /  _ | _   \   /    \    | O |    /          _   _   _
+ /     /    \  |_|_|_|   \ /      \   |___|   /          | |_| |_| |
+/     /      \  | O |     /        \  | |_|  /      /\   |         |
+    _   _   _ \ |___|    /          \ |__|| /      /  \  |  O   O  |
+   | |_| |_| |  | |_|   /             | |_|       /    \ |   __ _  |
+   |         |  |__||  /              |_| |      /       |     |   |
+   | O  O  O |  | |_| /               |__ |     /        | O  O  O |
+   |  _      |  _   _   _        ______   |   _   _   _  |  _      |
+   | |__|_ | |_| |_| |_| |______|      |_____| |_| |_| |_| |__|_ |_|
+   |  |   _| |        _  |  | _|  ____     _||        _  |  |    | |
+   |   _| _  ||_|   _|_  | _|_   |||||| |_| _||_|   _|_  |   _| _| |
+   |  __|  |_|  |_       | | |__ |++++|   |_||  |_      ||  __|  |_|
+   |_________|___________|-------------------|___________|_________|
+                                 /_/_/
+                                /_/_/
+    """
+    print(castle)
     story_one = """
 Reining supreme in his icy citadel in Northern
 the Lich King continues to consume innocent souls.
@@ -384,7 +407,7 @@ def main():
     """
 
     system('clear')
-    print(f.renderText('Login'))
+    print(f.renderText('       Login'))
     print("\nWelcome Adventurer,\n")
     input_username = input("Please enter your username: ")
     input_password = maskpass.askpass("\nPlease enter your password: ")
