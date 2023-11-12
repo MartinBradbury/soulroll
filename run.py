@@ -164,6 +164,8 @@ def user_authentication(input_username, auth_hash):
                 and record['password'] == auth_hash):
             match = True
             break
+        if input_username == 'exit'.lower():
+            banner()
     if match:
         print("\nLogging in.....\n")
         sleep(1)
@@ -172,6 +174,7 @@ def user_authentication(input_username, auth_hash):
 
     else:
         print("Incorrect username or password. Please try again")
+        print("Or type exit in username to exit to main menu.")
         sleep(2)
         main()
 
