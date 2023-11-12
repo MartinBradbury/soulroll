@@ -215,16 +215,19 @@ def deathroll():
 
     system('clear')
     print(f.renderText('Welcome to Deathroll\n'))
-    story = """
+    story_one = """
 Reining supreme in his icy citadel in Northern
 the Lich King continues to consume innocent souls.
 Any soul claimed by the Lich King would never be able
 to leave as they become forever enthralled by his grasp.
 These souls become lich spirits and destined to
-serve him for all eternity.
-
+serve him for all eternity.\n
+    """
+    story_two = """
 Until now. . . . . .
+    """
 
+    story_three = """\n
 Mighty champion
 you have been entrusted with innocent souls to challenge
 the Lich King
@@ -233,7 +236,11 @@ souls back to their true resting place
 The fate of all Azeroth is in your hards
 Are your ready for this challenge?\n
     """
-    print_letters(story)
+    print_letters(story_one)
+    sleep(2)
+    print_letters(story_two)
+    sleep(1)
+    print_letters(story_three)
     input("\nPress return to continue to the rules")
     system('clear')
     print(f.renderText('Rules\n'))
