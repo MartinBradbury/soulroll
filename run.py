@@ -243,11 +243,11 @@ def deathroll():
     print(castle)
     sleep(2)
     story_one = """
-Reining supreme in his icy citadel in Northern
-the Lich King continues to consume innocent souls.
+Reining supreme in his icy citadel in Northrend
+the Lich King Arthas continues to consume innocent souls.
 Any soul claimed by the Lich King would never be able
-to leave as they become forever enthralled by his grasp.
-These souls become lich spirits and destined to
+to leave as they become forever enthralled by his icy grasp.
+These souls become bound as lich spirits and destined to
 serve him for all eternity.\n
     """
     story_two = """
@@ -255,12 +255,12 @@ Until now. . . . . .
     """
 
     story_three = """\n
-Mighty champion
+Mighty champion,
 you have been entrusted with innocent souls to challenge
-the Lich King
+the Lich King and reclaim the stolen souls.\n
 Will you be able to defeat him and return the innocent
-souls back to their true resting place
-The fate of all Azeroth is in your hards
+souls back to their true resting place?\n
+The fate of all Azeroth is in your hards\n
 Are your ready for this challenge?\n
     """
     print_letters(story_one)
