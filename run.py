@@ -277,6 +277,10 @@ Are your ready for this challenge?\n
     print("* Each roll after that will be between 1 and the number")
     print("  you last rolled.\n")
     print("* The aim of the game is to NOT roll number 1.\n")
+    print("* Should you beat the Lich King you will be")
+    print("  rewarded one soul.\n")
+    print("* Should you be defeated, you will lose a soul")
+    print("  to the Lich King.\n")
     input("Press return to continue")
             
 
