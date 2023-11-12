@@ -100,9 +100,9 @@ def create_account():
         print("Passwords do not match")
         sleep(3)
         create_account()
-    score = 20
+    souls = 20
     upload = SHEET.worksheet('username')
-    upload.append_row([username, hash1, score])
+    upload.append_row([username, hash1, souls])
     banner()
 
 
@@ -193,9 +193,9 @@ def leaderboard():
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
     data = SHEET.get_all_records()
     df = pd.DataFrame(data)
-    df = df.sort_values(by='score', ascending=False)
+    df = df.sort_values(by='souls', ascending=False)
     print(f.renderText('Leaderboard'))
-    print(df.to_string(columns=['username', 'score'], index=False))
+    print(df.to_string(columns=['username', 'souls'], index=False))
     sleep(5)
     input("\nPress enter to return to main menu")
     banner()
@@ -285,12 +285,12 @@ Are your ready for this challenge?\n
             
 
 
-def random_num(new_score, input_username):
+def random_num(new_souls, input_username):
     system('clear')
     roll = input("Please type roll to start: ").lower()
     if roll != "roll":
         print("please type roll to begin")
-        random_num(new_score, input_username)
+        random_num(new_souls, input_username)
     system('clear')
     rolling = "Rolling . . . . . . .\n"
     print_letters(rolling)
@@ -313,8 +313,8 @@ def random_num(new_score, input_username):
         if (number1 == 1):
             print("Oh no, the Lich King defeated you!")
             print("You have lost a soul to the Lich King")
-            new_score -= 1
-            print(f"\n {input_username} you now have {new_score} souls\n")
+            new_souls -= 1
+            print(f"\n {input_username} you now have {new_souls} souls\n")
             break
         input("press any key for Lich Kings roll\n")
         number2 = random.randint(1, number2)
@@ -326,10 +326,10 @@ def random_num(new_score, input_username):
             print("The Lich King lost")
             print("Congratulations YOU won!")
             print("You have rescued one trapped soul")
-            new_score += 1
-            print(f"\nWell done {input_username} you now have {new_score} souls\n")
+            new_souls += 1
+            print(f"\nWell done {input_username} you now have {new_souls} souls\n")
             break
-    return new_score
+    return new_souls
 
 
 def print_letters(text):
@@ -355,7 +355,7 @@ def clear():
         system("cls")
 
 
-def get_current_score(input_username):
+def get_current_souls(input_username):
     """
     This function is called from the main function. It opens
     the google spreadsheet userdata and checks the username
@@ -370,14 +370,14 @@ def get_current_score(input_username):
     for i in range(1, SHEET.row_count + 1):
         username = SHEET.cell(i, username_index).value
         if username == input_username:
-            score = SHEET.cell(i, column_headers.index('score') + 1).value
+            souls = SHEET.cell(i, column_headers.index('souls') + 1).value
             system('clear')
-            print(f"Well met {username}! your current score is {score}\n")
+            print(f"Well met {username}! you currently have {souls} souls.\n")
             input("\nPress the return key to continue")
-            return score
+            return souls
 
 
-def update_score(input_username, add_score):
+def update_souls(input_username, add_souls):
     """
     This function updates the user score after each random_num played.
     It opens the google sheet userdata, finds the correct user and
@@ -387,14 +387,14 @@ def update_score(input_username, add_score):
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
     column_headers = SHEET.row_values(1)
     username_index = column_headers.index('username') + 1
-    value_to_update = add_score
+    value_to_update = add_souls
     row_count = len(SHEET.get_all_values())
     for i in range(1, SHEET.row_count + 1):
         username = SHEET.cell(i, username_index).value
         if username == input_username:
             SHEET.update_cell(i, column_headers.index(
-                'score') + 1, value_to_update)
-            return update_score
+                'souls') + 1, value_to_update)
+            return update_souls
 
 
 def main():
@@ -422,14 +422,14 @@ def main():
     auth = input_password.encode()
     auth_hash = hashlib.md5(auth).hexdigest()
     user_authentication(input_username, auth_hash)
-    score = get_current_score(input_username)
-    new_score = int(score)
+    souls = get_current_souls(input_username)
+    new_souls = int(souls)
     sleep(1)
     deathroll()
-    test_score = random_num(new_score, input_username)
+    test_souls = random_num(new_souls, input_username)
     sleep(1)
-    add_score = test_score
-    update_score(input_username, add_score)
+    add_souls = test_souls
+    update_souls(input_username, add_souls)
     sleep(2)
     while True:
         print("would you like to play again?")
@@ -437,11 +437,11 @@ def main():
         if response == 'y':
             print("game restarting.......")
             sleep(3)
-            score = get_current_score(input_username)
-            new_score = int(score)
-            test_score = random_num(new_score, input_username)
-            add_score = test_score
-            update_score(input_username, add_score)
+            souls = get_current_souls(input_username)
+            new_souls = int(souls)
+            test_souls = random_num(new_souls, input_username)
+            add_souls = test_souls
+            update_souls(input_username, add_souls)
         elif response == 'n':
             print("Thankyou for playing!")
             banner()
