@@ -15,6 +15,7 @@ import sys
 import time
 
 
+
 f = Figlet(font='slant')
 
 SCOPE = [
@@ -52,11 +53,11 @@ def banner():
         clear()
         print(f"\nYou selected option {selection}\n")
         print_letters(initilising)
-        sleep(3)
+        sleep(1)
         return banner_select[selection]()
     else:
         print("\nIncorrect selection, please try again")
-        sleep(3)
+        sleep(1)
         banner()
 
 
@@ -98,7 +99,7 @@ def create_account():
         hash1 = hashlib.md5(enc).hexdigest()
     else:
         print("Passwords do not match")
-        sleep(3)
+        sleep(2)
         create_account()
     souls = 20
     upload = SHEET.worksheet('username')
@@ -138,7 +139,7 @@ def username_check(username):
             except ValueError as e:
                 print(f"Invalid username: {e},")
                 print("It must contain 3 to 10 characters and no numbers\n")
-                sleep(3)
+                sleep(2)
                 return False
     return True
 
@@ -165,13 +166,13 @@ def user_authentication(input_username, auth_hash):
             break
     if match:
         print("\nLogging in.....\n")
-        sleep(3)
+        sleep(1)
         print("Login Successful")
         sleep(1)
 
     else:
         print("Incorrect username or password. Please try again")
-        sleep(3)
+        sleep(2)
         main()
 
 
@@ -196,7 +197,7 @@ def leaderboard():
     df = df.sort_values(by='souls', ascending=False)
     print(f.renderText('Leaderboard'))
     print(df.to_string(columns=['username', 'souls'], index=False))
-    sleep(5)
+    sleep(2)
     input("\nPress enter to return to main menu")
     banner()
 
@@ -298,7 +299,7 @@ def random_num(new_souls, input_username):
     number1 = random.randint(2, 100)
     print(f"\nyou rolled: {number1}\n")
     number2 = random.randint(2, 100)
-    sleep(2)
+    sleep(1)
     print("The Lich King is rolling\n")
     print_letters(rolling)
     sleep(1)
@@ -436,7 +437,7 @@ def main():
         response = input("Please select (y/n): ").lower()
         if response == 'y':
             print("game restarting.......")
-            sleep(3)
+            sleep(2)
             souls = get_current_souls(input_username)
             new_souls = int(souls)
             test_souls = random_num(new_souls, input_username)
