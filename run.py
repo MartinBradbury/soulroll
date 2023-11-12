@@ -15,7 +15,6 @@ import sys
 import time
 
 
-
 f = Figlet(font='slant')
 
 SCOPE = [
@@ -219,7 +218,6 @@ def deathroll():
 
     system('clear')
     castle = """
-                    
 
                  +++++
                +++++
@@ -264,7 +262,7 @@ you have been entrusted with innocent souls to challenge
 the Lich King and reclaim the stolen souls.\n
 Will you be able to defeat him and return the innocent
 souls back to their true resting place?\n
-The fate of all Azeroth is in your hards\n
+The fate of all Azeroth is in your hands\n
 Are your ready for this challenge?\n
     """
     print_letters(story_one)
@@ -286,7 +284,6 @@ Are your ready for this challenge?\n
     print("* Should you be defeated, you will lose a soul")
     print("  to the Lich King.\n")
     input("Press return to continue")
-            
 
 
 def random_num(new_souls, input_username):
@@ -331,7 +328,7 @@ def random_num(new_souls, input_username):
             print("Congratulations YOU won!")
             print("You have rescued one trapped soul")
             new_souls += 1
-            print(f"\nWell done {input_username} you now have {new_souls} souls\n")
+            print(f"\n{input_username}, you now have {new_souls} souls\n")
             break
     return new_souls
 
@@ -459,7 +456,7 @@ banner_select = dict({
     "1": main,
     "2": create_account,
     "3": leaderboard,
-    "4": exit
+    "4": banner
 })
 
 
