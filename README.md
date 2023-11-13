@@ -121,3 +121,31 @@ positioning of the terminal
 - [hashlib](https://docs.python.org/3/library/hashlib.html) was imported to encript and decode the users password before writing to google sheets and when required for login.
 - [maskpass](https://pypi.org/project/maskpass/) was used to hide the users input in the terminal when typing in the password.
 - [pandas](https://pandas.pydata.org/docs/getting_started/install.html) was used to display the leaderboard in a dataframe.
+
+## Testing
+
+### Code Validation
+
+#### PEP8 Validation
+
+PEP8 is a style guide for Python Code
+
+The results were all clear with no errors found in run.py code through the CI Python Linter.
+![PEP8 Validation]()
+
+### Accessibility and Lighthouse
+
+colour scheme for accesibility score and value.
+![Lighthouse Scoure]()
+
+### Manual Testing
+
+#### Browser Compatability Testing
+
+- The app was tested on the following broswers, Chrmose, Edge, Safari.•••••
+- The app worked as intended on all browsers.
+
+### User Story Testing
+
+| | User Story      | Testing|
+|1|Game start| Pass|
