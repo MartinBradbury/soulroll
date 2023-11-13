@@ -71,3 +71,53 @@ As a site visitor,
 ## Features
 
 ### Start Screen
+
+
+
+
+
+## Future Features
+
+
+
+
+
+## Design Features
+
+### Design Choices
+
+### Typography
+
+### Mock Terminal
+positioning of the terminal
+
+## Flow Chart??
+
+## Technology
+
+### Language
+
+- Python
+
+### Framweorks and Tools
+
+- [Heroku](https://www.heroku.com/)
+- [GitHub](https://github.com/)
+- [CodeAnywhere](https://app.codeanywhere.com/)
+- [Lucid Chart](https://www.lucidchart.com/pages/)**
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools/)
+- [Google Lighthouse](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk)
+- Code institute's template for the mock terminal was used, but it was styled by centering it and giving it a blue and black theme.
+- Code Institutes Python Linter was used to check the Pythn code for errors.
+
+### Python Libraries and Modules
+
+- [google.oauth2.service_account](https://google-auth.readthedocs.io/en/master/reference/google.oauth2.service_account.html) was used to authorize the connection with the Google Sheets API. The Usernames, Passwords and souls were stored here.
+- [gspread](https://docs.gspread.org/en/v5.11.3/) was imported and used to access and update data in the spreadsheet.
+- [random](https://docs.python.org/3/library/random.html) was imported for generating random numbers.
+- [pyfiglet](https://pypi.org/project/pyfiglet/) was imported to render ascii art
+- [sys](https://docs.python.org/3/library/sys.html) was imported to clear the terminal on different operating systems.
+- [time](https://docs.python.org/3/library/time.html) was imported to allow sleep delays between prompts
+- [hashlib](https://docs.python.org/3/library/hashlib.html) was imported to encript and decode the users password before writing to google sheets and when required for login.
+- [maskpass](https://pypi.org/project/maskpass/) was used to hide the users input in the terminal when typing in the password.
+- [pandas](https://pandas.pydata.org/docs/getting_started/install.html) was used to display the leaderboard in a dataframe.
