@@ -173,8 +173,8 @@ def user_authentication(input_username, auth_hash):
 
     else:
         print("Incorrect username or password. Please try again")
-        print("Or type exit in username to exit to main menu.")
-        sleep(2)
+        print("Or type exit for username to exit to main menu.")
+        sleep(3)
         main()
 
 
@@ -270,7 +270,19 @@ Are your ready for this challenge?\n
     print_letters(story_two)
     sleep(1)
     print_letters(story_three)
-    input("\nPress return to continue to the rules")
+    ready_check()
+
+def ready_check():
+    begin = input("\nType (y) to see the rules or (n) to quit: ").lower()
+    if begin == 'n':
+        banner()
+    if begin == 'y':
+        rules()
+    else:
+        ready_check()
+    
+
+def rules():
     system('clear')
     print(f.renderText('Rules\n'))
     print("* This is a random dice game of chance.\n")
@@ -283,8 +295,17 @@ Are your ready for this challenge?\n
     print("  rewarded one soul.\n")
     print("* Should you be defeated, you will lose a soul")
     print("  to the Lich King.\n")
-    input("Press return to continue")
-
+    print("Are you ready to face the Lich King?\n")
+    start_game = input("Type (y) to begin or (n) to quit: ").lower()
+    if start_game == 'n':
+        banner()
+    if start_game != 'y':
+        print('please type (y/n)')
+        rules()
+    else:
+        print('\nLets begin..........')
+        sleep(2)
+        
 
 def random_num(new_souls, input_username):
     system('clear')
@@ -300,31 +321,33 @@ def random_num(new_souls, input_username):
     print(f"\nyou rolled: {number1}\n")
     number2 = random.randint(2, 100)
     sleep(1)
-    print("The Lich King is rolling\n")
+    print("The Lich King makes his move\n")
     print_letters(rolling)
     sleep(1)
-    print(f"\nthe Lich King rolled: {number2}\n")
-    input("press return to keep rolling")
+    print(f"\nThe Lich King rolled: {number2}\n")
+    input("press enter to roll again")
     while (number1 + number2 != 1):
         system('clear')
-        # input("press any key to roll again")
         number1 = random.randint(1, number1)
         print_letters(rolling)
         print(f"\nyou rolled: {number1}\n")
+        sleep(1)
         if (number1 == 1):
-            print("Oh no, the Lich King defeated you!")
+            system('clear')
+            print("Oh no, the Lich King defeated you!\n")
             print("You have lost a soul to the Lich King")
             new_souls -= 1
-            print(f"\n {input_username} you now have {new_souls} souls\n")
+            print(f"\n{input_username} you now have {new_souls} souls\n")
             break
-        input("press any key for Lich Kings roll\n")
+        print("The Lich King makes his move\n")
         number2 = random.randint(1, number2)
         print_letters(rolling)
         sleep(1)
         print(f"\nThe Lich King rolled: {number2}\n")
-        input("press return to keep rolling")
+        input("press enter to keep rolling")
         if (number2 == 1):
-            print("The Lich King lost")
+            system('clear')
+            print("The Lich King lost\n")
             print("Congratulations YOU won!")
             print("You have rescued one trapped soul")
             new_souls += 1
@@ -374,7 +397,7 @@ def get_current_souls(input_username):
             souls = SHEET.cell(i, column_headers.index('souls') + 1).value
             system('clear')
             print(f"Well met {username}! you currently have {souls} souls.\n")
-            input("\nPress the return key to continue")
+            input("\nPress enter to continue")
             return souls
 
 
@@ -433,7 +456,7 @@ def main():
     update_souls(input_username, add_souls)
     sleep(2)
     while True:
-        print("would you like to play again?")
+        print("would you like to play again?\n")
         response = input("Please select (y/n): ").lower()
         if response == 'y':
             print("game restarting.......")
