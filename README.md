@@ -1,32 +1,39 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Warcraft Mini-games
 
-Welcome,
+(Developer: Martin Bradbury)
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+## Live Website
 
-## Reminders
+Link to live website: [Warcraft Mini-games](https://warcraft-minigames-58310d7b7a2b.herokuapp.com/)
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+## Project purpose
 
-## Creating the Heroku app
+LichKing is a Python terminal project game. The game is a story driven random number game where the player competes against the computer, the Lich King. The aim of the game is to reclaim lost souls the Lich King has taken. To do this you need to Lich King to roll the number 1 before you do. The game features a create account feature that stores the users details on google sheets, a login feature which pulls the users data from google sheets and a leaderboard, which displays all the users and their current souls. The game is interactive and provides feedback to the user throughout. All user input has validation functionality and the user can seamlessly play again or return to the main menu. 
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## Table of Contense
 
-1. `heroku/python`
-2. `heroku/nodejs`
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
 
-Connect your GitHub repository and deploy as normal.
 
-## Constraints
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+## Rules of the Game
 
----
+    • You will take it in turn to roll a random number between 1 and 100.
+    • Each roll after that will be between 1 and the number you last rolled.
+    • The aim of the game is to NOT roll number 1.
+    • Should you beat the Lich King you will be rewarded one soul.
+    • Should you be defeated, you will lose a soul to the Lich King.
+    • All new accounts start with 20 souls.
 
-Happy coding!
+## User Experience (UX)
+
+### Key Project Goals
+
+    • To write and develop a Python terminal game that is interactive.
+    • The game should be easy to follow and the interface should be easy to navigate.
+    • The user should be able to restart or continue playing after logging in.
+    • The user will need to create an account username and password which will be stored on google sheets.
+    • There will be validation when creating the username and password.
+    • A login feature that requires the user to type back in their username and password stored on google sheets.
+    • A leaderboard feature which displays the users who have played and their souls remaining. 
