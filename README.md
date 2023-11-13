@@ -149,3 +149,63 @@ colour scheme for accesibility score and value.
 
 | | User Story      | Testing|
 |1|Game start| Pass|
+
+
+### Fixed Bugs
+
+#### Username and Password
+The username and password was not accepted even when inputted corectly. This bug was fixed by removing the .lower() on the input method so that the username and password became case sensetive.
+
+#### Stored Enter Presses
+Pressing enter gets stored and when a prompt askes you to press enter to continue it skips it before the user gets chance to ready what is shown. I fixed this buy by changing some of the continue prompts from enter to a required key press y/n.
+
+#### Castle Image
+The castle image was not displaying correctly so I removed some of the height from the design. The castle now displays correctly in the terminal.
+
+### Known Bugs
+
+#### Storing Keypress
+
+#### ???
+
+
+## Deployment
+
+All the code written for this project was written in CodeAnywhere. GitHub was used for version control and the application was deployed to Heroku from Github.
+
+### How this site was deployed to heroku
+
+After account setup, the steps were as follows:
+
+- Click the "create new app" button on heroku
+- Create a unique name for the app
+- Select region (Europe was selected for this project)
+- Click "create app"
+- Go to settings tab
+- Set config vars using the creds.json file. In the field for key, "CREDS" should be entered and in the field for value, the entire cred.json file content is entered
+- Another key and value need to be added and these are, PORT and 8000, respectively
+- Then click "add buildpack"
+- Use python and nodejs buildpacks
+- The buildpack order should be python on top and nodejs underneath
+- Go to the deploy tab
+- Select the deployment method (github was used for this project)
+- Search for the github repository name (it was twenty_one for this project)
+- Click connect
+- There is an option to use manual deployment or automatic deployment. Make sure main branch is selected
+- After the first deployment you will see a message saying "your app was successfully deployed" and there will be a "view" button to take you to your deployed application
+
+The live link for this project can be found here - [Warcraft Mini-games](https://warcraft-minigames-58310d7b7a2b.herokuapp.com/)
+
+## Credits
+
+[Love sandwiches code institute walk through](https://github.com/Code-Institute-Solutions/love-sandwiches-p5-sourcecode/blob/master/05-deployment/01-deployment-part-1/run.py) - Code was adapted from the code institute love sandwiches project.
+
+[Learning To Program in Python](https://www.amazon.co.uk/Learning-Program-Python-2017-Heathcote/dp/1910523119) - This book was used to help with my knowledge and provide ideas and exercises to implement my code. 
+
+time
+maskpass
+hashlib
+
+mentor
+
+
