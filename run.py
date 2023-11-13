@@ -217,7 +217,7 @@ def deathroll():
     """
 
     system('clear')
-    castle = """
+    castle = r"""
 
                  +++++
                +++++
@@ -272,6 +272,7 @@ Are your ready for this challenge?\n
     print_letters(story_three)
     ready_check()
 
+
 def ready_check():
     begin = input("\nType (y) to see the rules or (n) to quit: ").lower()
     if begin == 'n':
@@ -280,7 +281,7 @@ def ready_check():
         rules()
     else:
         ready_check()
-    
+
 
 def rules():
     system('clear')
@@ -305,7 +306,7 @@ def rules():
     else:
         print('\nLets begin..........')
         sleep(2)
-        
+
 
 def random_num(new_souls, input_username):
     system('clear')
