@@ -43,6 +43,7 @@ LichKing is a Python terminal project game. The game is a story driven random nu
         -  [Castle Image](#castle-image)
     -   [Known Bugs](#known-bugs)
         -  [Storing Keypress](#storing-keypress)
+        -  [Print Statements](#print-statements)
 10. [Deployment](#deployment)
     -   [Heroku](#how-this-site-was-deployed-to-heroku)
 11. [Credits](#credits)
@@ -105,9 +106,24 @@ As a site visitor,
 ## Features
 
 ### Start Screen
+The home screen will display the ASCII art heading 'SoulRoll' along with the options that can be selected. Each option is numbered for ease of selection.
 
+#### Home screen image
+![Home Screen](images/welcome.png)
 
+### Login
+If the user selects option one 'login' they will be presented with a screen that asks the user to type in their username and then password. The password is protected with maskpass that puts stars over each character as to protect their personal password. 
 
+#### Login image
+![Login Image](images/login.png)
+
+### Login Success
+If the user correctly inputs their username and password they will be presented with login success and then a clear screen which displays how many souls they currently have.
+
+#### Login Success image and souls
+![Login Success](images/loginsuccess.png)
+
+![Current Souls](images/Currentsouls.png)
 
 
 ## Future Features
@@ -184,19 +200,21 @@ colour scheme for accesibility score and value.
 ### Fixed Bugs
 
 #### Username and Password
-The username and password was not accepted even when inputted corectly. This bug was fixed by removing the .lower() on the input method so that the username and password became case sensetive.
+The username and password was not accepted even when inputted corectly. This bug was fixed by removing the .lower() on the input method so that the username and password became case sensetive. I informed the user when creating the account that the username and password are case sensetive. 
 
 #### Stored Enter Presses
-Pressing enter gets stored and when a prompt askes you to press enter to continue it skips it before the user gets chance to ready what is shown. I fixed this buy by changing some of the continue prompts from enter to a required key press y/n.
+Pressing enter gets stored when the print statements are being displayed. When the input prompt appears and askes you to press enter to continue it skips it due to the stored enter key press before the user gets chance to ready what is shown. This also skipped through the rules section of the game. I fixed this buy by changing some of the continue prompts from enter to a required key press y/n.
 
 #### Castle Image
-The castle image was not displaying correctly so I removed some of the height from the design. The castle now displays correctly in the terminal.
+The castle image was not displaying correctly so I removed some of the height from the design. The castle now displays correctly in the terminal. It also through effors in the CI linter so I changed the string to an r string.
 
 ### Known Bugs
 
 #### Storing Keypress
+Although I overcame the stored enter key press skipping content by adding a required key press y/n, during the random number generation aspect of the game it will skip through rolls quickly if the user presses enter before prompted. I would like to investigate a way to disable any key press until the prompt is displayed. 
 
-#### ???
+#### Print statements
+When the story element of the game prints letter by letter, if the user presses any key it inputs the key press in the print statement. Enter will drop a line as the print statement is getting printed to the terminal. I would like to research a way to restruct any key press while the story is being printed to the terminal. 
 
 
 ## Deployment
