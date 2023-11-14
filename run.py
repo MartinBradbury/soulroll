@@ -3,13 +3,9 @@ from google.oauth2.service_account import Credentials
 import random
 import hashlib
 import maskpass
-# pip install maskpass
 from os import system
-# to clear screen
 from pyfiglet import Figlet
-# pip3 install pyfiglet
 from time import sleep
-# time sleep
 import pandas as pd
 import sys
 import time
