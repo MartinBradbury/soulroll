@@ -106,16 +106,16 @@ As a site visitor,
 ## Features
 
 ### Start Screen
-The home screen will display the ASCII art heading 'SoulRoll' along with the options that can be selected. Each option is numbered for ease of selection.
+The home screen will display the ASCII art heading 'SoulRoll' along with the options that can be selected. Each option is numbered for ease of selection. Validation will occur on selection to check the user has typed a valid number. If no valid number is used then a message appears stating invalid selection, please try again. 
 
 #### Home screen image
 ![Home Screen](images/welcome.png)
 
 ### Login
-If the user selects option one 'login' they will be presented with a screen that asks the user to type in their username and then password. The password is protected with maskpass that puts stars over each character as to protect their personal password. 
+If the user selects option one 'login' they will be presented with a screen that asks the user to type in their username and then password. This information is stored on google sheets. When the user types in their username and password a query is sent to google sheets to check if that username and password exists. If a match is found then will progress, if not they will be informed that no match was found and they will be asked to reinput their username and password again. To porvent the user being stuck in an endless loop here, when they are informed that their usernamer and password is incorrect, they will alse be informed that if they type exit as the username and nothing in the password, they will return to the main menu. All password data stored on google sheets is encripted using hashlib which means that no sensitive data is visible on the google sheets. 
 
 #### Login image
-![Login Image](images/login.png)
+![Login Image](images/unandpw.png)
 
 ### Login Success
 If the user correctly inputs their username and password they will be presented with login success and then a clear screen which displays how many souls they currently have.
@@ -124,6 +124,13 @@ If the user correctly inputs their username and password they will be presented 
 ![Login Success](images/loginsuccess.png)
 
 ![Current Souls](images/Currentsouls.png)
+
+#### Failed Login
+![Failed Login](images/incorrect.png)
+
+#### Encripted Password data on google sheets
+![Encripted Password](images/encript.png)
+
 
 
 ## Future Features
