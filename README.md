@@ -271,8 +271,8 @@ colour scheme for accesibility score and value.
 
 #### Browser Compatability Testing
 
-- The app was tested on the following broswers, Chrmose, Edge, Safari.•••••
-- The app worked as intended on all browsers.
+- The app was tested on the following broswers: Chrmose, Edge, Safari.
+- The app worked as intended on all browsers tested.
 
 ## Bugs
 
@@ -306,19 +306,20 @@ After account setup, the steps were as follows:
 
 - Click the "create new app" button on heroku
 - Create a unique name for the app
-- Select region (Europe was selected for this project)
+- Select region, Europe was selected for this project
 - Click "create app"
 - Go to settings tab
 - Set config vars using the creds.json file. In the field for key, "CREDS" should be entered and in the field for value, the entire cred.json file content is entered
-- Another key and value need to be added and these are, PORT and 8000, respectively
 - Then click "add buildpack"
 - Use python and nodejs buildpacks
 - The buildpack order should be python on top and nodejs underneath
 - Go to the deploy tab
-- Select the deployment method (github was used for this project)
-- Search for the github repository name (it was twenty_one for this project)
+- Select the deployment method, github was used for this project
+- Search for the github repository name it was warcraft-minigames for this project
 - Click connect
-- There is an option to use manual deployment or automatic deployment. Make sure main branch is selected
+- There is an option to use manual deployment or automatic deployment. 
+- For control of commits and updates, manual deployment was selected
+- Make sure main branch is selected
 - After the first deployment you will see a message saying "your app was successfully deployed" and there will be a "view" button to take you to your deployed application
 
 The live link for this project can be found here - [Warcraft Mini-games](https://warcraft-minigames-58310d7b7a2b.herokuapp.com/)
