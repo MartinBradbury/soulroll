@@ -37,15 +37,13 @@ def banner():
     a dictionary. Once user has selected an option, the will see
     a print message saying initilising and a 3 second pause.
     """
-
     clear()
     print(f.renderText('  Welcome To'))
     print(f.renderText('      SoulRoll'))
-    print("Welcome")
-    print("[1] Login")
+    print("\n[1] Login")
     print("[2] create account")
     print("[3] Leaderboard")
-    print("[4] exit")
+    print("[4] exit\n")
     selection = input("What would you like to do?: ")
     if selection in banner_select.keys():
         initilising = "Initilising............\n"
