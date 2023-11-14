@@ -27,7 +27,7 @@ SHEET = GSPREAD_CLIENT.open('userdata')
 
 def banner():
     """
-    This function displays the game name and provides the user 
+    This function displays the game name and provides the user
     with 4 options. Each option selection is validated.
     """
     clear()
@@ -53,7 +53,7 @@ def banner():
 
 def create_account():
     """
-    This function allows the user to create an account. It validates the 
+    This function allows the user to create an account. It validates the
     username chosen to check that it does not exist and comprises of
     no numbers and is between 3 and 10 characters. It allows users to create
     a password which is encoded and stored on google sheets.
@@ -94,7 +94,7 @@ def username_check(username):
     """
     This function is used to validate the username created. It checks
     to see if the username has already been taken and if the username
-    is within 3 to 10 characters and has no numbers. 
+    is within 3 to 10 characters and has no numbers.
     """
     data = SHEET.worksheet('username')
     usr = data.get_all_records()
@@ -123,7 +123,7 @@ def username_check(username):
 def user_authentication(input_username, auth_hash):
     """
     This function recieves the username and password input by the
-    user and checks google sheets to see if there is a match. 
+    user and checks google sheets to see if there is a match.
     """
 
     data = SHEET.worksheet('username')
@@ -152,9 +152,9 @@ def user_authentication(input_username, auth_hash):
 def leaderboard():
     """
     This function creates a pandas dataframe from the google sheet
-    data and presents the specific columns, username and souls to 
-    the terminal. It also hides the index and presents the data 
-    with highest score at the top. 
+    data and presents the specific columns, username and souls to
+    the terminal. It also hides the index and presents the data
+    with highest score at the top.
     """
 
     clear()
@@ -171,8 +171,8 @@ def leaderboard():
 
 def soulroll():
     """
-    This function displays the ASCII art and presents the story of 
-    the game. 
+    This function displays the ASCII art and presents the story of
+    the game.
     """
     system('clear')
     print(f.renderText('SoulRoll'))
@@ -251,7 +251,7 @@ def ready_check():
 def rules():
     """
     This function displays the rules of the game to the terminal and
-    validats the users response to continue to the game or exit to 
+    validats the users response to continue to the game or exit to
     main menu.
     """
     system('clear')
@@ -281,11 +281,11 @@ def rules():
 def random_num(new_souls, input_username):
     """
     This function uses the random number generation to generate
-    numbers between 2 and 100 for the first roll and then 1 to 
-    whatever the last number rolled was. It will keep generating 
+    numbers between 2 and 100 for the first roll and then 1 to
+    whatever the last number rolled was. It will keep generating
     a random number until number 1 is rolled. At this point the loop
     will stop.
-    
+
     """
     system('clear')
     roll = input("Please type roll to start: ").lower()
@@ -382,7 +382,7 @@ def update_souls(input_username, add_souls):
     """
     This function updates the user score after each random_num played.
     It opens the google sheet userdata, finds the correct user and
-    updates their score. 
+    updates their score.
     """
 
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
@@ -400,9 +400,9 @@ def update_souls(input_username, add_souls):
 
 def main():
     """
-    This function runs from top down and structures the game. It logs the user 
-    in, validates their details and and gets their current souls from 
-    google sheet data. It runs the game and then asks if the user would 
+    This function runs from top down and structures the game. It logs the user
+    in, validates their details and and gets their current souls from
+    google sheet data. It runs the game and then asks if the user would
     like to replay or quit.
     """
 
