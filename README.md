@@ -1,10 +1,10 @@
-# Warcraft Mini-games
+# SoulRoll
 
 (Developer: Martin Bradbury)
 
 ## Live Website
 
-Link to live website: [Warcraft Mini-games](https://warcraft-minigames-58310d7b7a2b.herokuapp.com/)
+Link to live website: [SoulRoll](https://soulroll-5cad4e0173ff.herokuapp.com/)
 
 ## Project purpose
 
@@ -315,14 +315,14 @@ After account setup, the steps were as follows:
 - The buildpack order should be python on top and nodejs underneath
 - Go to the deploy tab
 - Select the deployment method, github was used for this project
-- Search for the github repository name it was warcraft-minigames for this project
+- Search for the github repository name it was soulroll for this project
 - Click connect
 - There is an option to use manual deployment or automatic deployment. 
 - For control of commits and updates, manual deployment was selected
 - Make sure main branch is selected
 - After the first deployment you will see a message saying "your app was successfully deployed" and there will be a "view" button to take you to your deployed application
 
-The live link for this project can be found here - [Warcraft Mini-games](https://warcraft-minigames-58310d7b7a2b.herokuapp.com/)
+The live link for this project can be found here - [SoulRoll](https://soulroll-5cad4e0173ff.herokuapp.com/)
 
 ## Credits
 
