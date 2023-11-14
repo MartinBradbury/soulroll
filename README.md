@@ -225,6 +225,11 @@ I decided to add the dark blue colour around the mock terminal to link to the st
 ### Mock Terminal
 I decided to adjust the position of the mock terminal so that it sat in the centre of the screen. I think this is more appealing for the user. The size of the terminal was unchanged.
 
+## Flow Chart
+This flow chart was drawn to show the flow of the game to help guide my design choices. 
+![Flow Chart](/images/flowchart.png)
+
+
 ## Technology
 
 ### Language
@@ -237,6 +242,7 @@ I decided to adjust the position of the mock terminal so that it sat in the cent
 - [GitHub](https://github.com/)
 - [Code Anywhere](https://app.codeanywhere.com/)
 - [Chrome DevTools](https://developer.chrome.com/docs/devtools/)
+- [Lucid Chart](https://www.lucidchart.com/pages/)
 - [Google Lighthouse](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk)
 - Code institute's template for the mock terminal was used, but it was styled by centring it and giving it a blue and black theme.
 - Code Institutes Python Linter was used to check the Python code for errors.
