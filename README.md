@@ -187,6 +187,26 @@ This section informs the user how they are going to play the game. It details, h
 #### The rules
 ![The Rules](/images/rules.png)
 
+### The Game - SoulRoll
+After accepting the rules the users will be asked to type roll to start the game. Once they type roll a message is printed saying rolling and a random number appears in the terminal that they rolled. This random number is generated at random between 2 and 100. The reason it is between 2 and 100 is that the user nor the lick king loses on their first roll. Appearing after the users roll will be another print statement saying that the Lich King is rolling. Their number will appear below. The user will be asked to press enter to roll again. This time the random number generated will be between 1 and the last number they rolled. The same creteria for the Lich King roll. This process continues until either the user or the Lich King rolls the number 1 and loses. One the game ends the user will be informed of how many souls they now have. If they win they gain one soul, if they lose the lose one soul. This information is updated to google sheets and stored for that user. The user can continue to play as many times as they like by selecting y to play again. If they do not what to play again they can select n and return to the main menu.
+
+#### Roll to begin
+![Roll to begin](/images/roll.png)
+
+#### Random number fist roll
+![Roll random](/images/rollone.png)
+
+#### Random number second roll
+![Roll random second](/images/rollsec.png)
+
+#### Lich King Won
+![Lich King Won](/images/lichwin.png)
+
+#### Player Won
+![Player Won](/images/playerwon.png)
+
+
+
 
 ## Future Features
 
