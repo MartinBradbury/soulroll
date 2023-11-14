@@ -330,10 +330,27 @@ The live link for this project can be found here - [SoulRoll](https://soulroll-5
 
 [Learning To Program in Python](https://www.amazon.co.uk/Learning-Program-Python-2017-Heathcote/dp/1910523119) - This book was used to help with my knowledge and provide ideas and exercises to implement my code. 
 
-time
-maskpass
-hashlib
+[Slack Community]()
+The Slack community was used when I had questions if a particllar function was possible. I used the feedback to research how to implement into my project.
 
-mentor
+[W3School](https://www.w3schools.com/)
+W3School website was used to help reinforce my Python knowledge and inspire he how I can implement certain features into my work. 
+
+[ASCII Art](https://www.asciiart.eu/buildings-and-places/castles#google_vignette)
+ASCII art website was used as inspiration to create my own castle design for my game.
+
+[Updating google spreadsheets and commands](https://www.youtube.com/watch?v=3OnT1PfDrfE&t=765s)
+I used this video to help me understand the functions in python for pulling data down from google sheets. I used this along side the google sheets documentation refered to in the video. It also prompted me to use the pandas dataframe when pulling the data down for my leaderboard.
+
+[MaskPass](https://pypi.org/project/maskpass/)
+A google search led me to maskpass function. I used the information to to implemented this function into my project to mask the password being typed by the user. 
+
+[Hashlib](https://docs.python.org/3/library/hashlib.html)
+A google search lead me to hashlib. I used the information to implement this feature into my project and encript the passwords before sending them to google sheets. 
+
+[Mentor] Narender 
+I would like to thank my mentor who has supported me with this project. His guidence has made me think about the design and implementation. His support throughout has been greatly recieved during this project. 
+
+Finally I would like to thank my wife and children who have supported me when I have been working long hours and late nights to get this project to the state it is in today. 
 
 
