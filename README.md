@@ -9,7 +9,7 @@ Link to live website: [SoulRoll](https://soulroll-5cad4e0173ff.herokuapp.com/)
 
 ## Project purpose
 
-SoulRoll is a Python terminal project game. The game is a story driven random number game where the player competes against the computer, the Lich King. The aim of the game is to reclaim lost souls the Lich King has taken. To do this you need to Lich King to roll the number 1 before you do. The game features a create account feature that stores the user’s details on google sheets, a login feature which pulls the users data from google sheets and a leader board, which displays all the users and their current souls. The game is interactive and provides feedback to the user throughout. All user input has validation functionality, and the user can seamlessly play again or return to the main menu. 
+SoulRoll is a Python terminal project game. The game is a story driven random number game where the player competes against the computer, the Lich King. The aim of the game is to reclaim lost souls the Lich King has taken. To do this you need the Lich King to roll the number 1 before you do. The game features a create account feature that stores the user’s details on google sheets, a login feature which pulls the users data from google sheets and a leader board, which displays all the users and their current souls. The game is interactive and provides feedback to the user throughout. All user input has validation functionality, and the user can seamlessly play again or return to the main menu. 
 
 ## Table of Content
 1.  [Rules of the Game](#rules-of-the-game)
