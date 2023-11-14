@@ -166,6 +166,9 @@ The leaderboard feature is selected from the home screen. It does not require th
 #### Leaderboard
 ![Leaderboard](images/leaderboard.png)
 
+### The Story
+The game is designed to be part of a story. Ther user, the champion is tasked with facing down the Lich King and trying to take back the souls he has stolen. Rather than the story appearing instantly all in one go, i added a feature so the story is printed character by character across the screen. This gives the user the impression that this story is being told to them as they read along. I also added sleep functions at different points as the story is being printed to give the user chance to finish reading the section and to add suspense. The whole story fits on one screen and you do not progress to the game rules until ready. To progress to the rules you have to type the letter y. Validation occurs to ensure they user typed the letter y. If they do, they progress to the rules, if not, they are informed that they must select y or n. If n is selected they are returned to the main screen.
+
 ## Future Features
 
 

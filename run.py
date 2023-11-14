@@ -247,8 +247,8 @@ def soulroll():
     print(castle)
     sleep(2)
     story_one = """
-Reining supreme in his icy citadel in Northrend
-the Lich King Arthas continues to consume innocent souls.
+Reining supreme in his icy citadel in Deceit
+the Lich King Ravnos continues to consume innocent souls.
 Any soul claimed by the Lich King would never be able
 to leave as they become forever enthralled by his icy grasp.
 These souls become bound as lich spirits and destined to
@@ -264,7 +264,7 @@ you have been entrusted with innocent souls to challenge
 the Lich King and reclaim the stolen souls.\n
 Will you be able to defeat him and return the innocent
 souls back to their true resting place?\n
-The fate of all Azeroth is in your hands\n
+The fate of all Nazimar is in your hands\n
 Are your ready for this challenge?\n
     """
     print_letters(story_one)
