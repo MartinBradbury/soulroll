@@ -167,7 +167,7 @@ The leaderboard feature is selected from the home screen. It does not require th
 ![Leaderboard](images/leaderboard.png)
 
 ### The Story
-The game is designed to be part of a story. The user, 'the champion' is tasked with facing down the Lich King and trying to take back the souls he has stolen. Rather than the story appearing instantly all in one go, i added a feature so the story is printed character by character across the screen. This gives the user the impression that this story is being told to them as they read along. I also added sleep functions at different points as the story is being printed to give the user chance to finish reading the section and to add suspense. The whole story fits on one screen and you do not progress to the game rules until ready. Before the story begins the game name is displayed to the user, before disapearing and a ASCII castle image appears. The story text scrolls below the castle image. To progress to the rules after the story you have to type the letter y. Validation occurs to ensure they user typed the letter y. If they do, they progress to the rules, if not, they are informed that they must select y or n. If n is selected they are returned to the main screen.
+The game is designed to be part of a story. The user, 'the champion' is tasked with facing down the Lich King and trying to take back the souls he has stolen. Rather than the story appearing instantly all in one go, i added a feature so the story is printed character by character across the screen. This gives the user the impression that this story is being told to them as they read along. I also added sleep functions at different points as the story is being printed to give the user chance to finish reading the section and to add suspense. The whole story fits on one screen and you do not progress to the game rules until ready. Before the story begins the game name is displayed to the user, before disapearing and a ASCII castle image I created appears. The story text scrolls below the castle image. To progress to the rules after the story you have to type the letter y. Validation occurs to ensure they user typed the letter y. If they do, they progress to the rules, if not, they are informed that they must select y or n. If n is selected they are returned to the main screen.
 
 #### Game name
 ![Game name](/images/soulroll.png)
@@ -206,25 +206,22 @@ After accepting the rules the users will be asked to type roll to start the game
 ![Player Won](/images/playerwon.png)
 
 
-
-
 ## Future Features
 
+### Gamble Souls
+I would like to add a feature when the user can gamble any number of souls they currently have. This feature should check how many souls the user has and only allow them to gamble upto the total the posess. This would be very risky however because if they lost they would lose all those souls, but if they win, they would take that many souls from the Lich King.
 
-
-
+### More games
+I would like to develop more games for this story setting. Hangman, battle ships etc could be adapted to be inline with the story setting of this game. Users would be able to play different games on their login and their scores for the different cames could be saved on google sheets. 
 
 
 ## Design Features
 
 ### Design Choices
-
-### Typography
+I decided to add the dark blue colour around the mock terminal to link to the story being told. The Lich King lives in icy mountais and is pure evil, the dark blue colour helps to tell that story along with the black background for contrast
 
 ### Mock Terminal
-positioning of the terminal
-
-## Flow Chart??
+I decided to adjust the position of the mock terminal so that it sat in the center of the screen. I think this is more applealing for the user. The size of the teminal was unchanged.
 
 ## Technology
 
@@ -237,7 +234,6 @@ positioning of the terminal
 - [Heroku](https://www.heroku.com/)
 - [GitHub](https://github.com/)
 - [CodeAnywhere](https://app.codeanywhere.com/)
-- [Lucid Chart](https://www.lucidchart.com/pages/)**
 - [Chrome DevTools](https://developer.chrome.com/docs/devtools/)
 - [Google Lighthouse](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk)
 - Code institute's template for the mock terminal was used, but it was styled by centering it and giving it a blue and black theme.
@@ -264,12 +260,12 @@ positioning of the terminal
 PEP8 is a style guide for Python Code
 
 The results were all clear with no errors found in run.py code through the CI Python Linter.
-![PEP8 Validation]()
+![PEP8 Validation](/images/cilinter.png)
 
 ### Accessibility and Lighthouse
 
 colour scheme for accesibility score and value.
-![Lighthouse Scoure]()
+![Lighthouse Scoure](/images/lighthouse.png)
 
 ### Manual Testing
 
