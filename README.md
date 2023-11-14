@@ -150,6 +150,16 @@ The username needs to be unique. After submitting a username google sheets is ch
 #### Username contains numbers
 ![Username contains Numbers](images/containsnum.png)
 
+### Password Creation
+The user is then asked to create a password. The password is case sensitive but can contain numbers, letters and any special characters. When the user is typing in their password it is hidden by stars using the maskpass feature. The user is able to see they they are typing characters as they input their password as a star appears for every character inputted. The ensure they user has not made a typing mistake, they have to input the password again to validate they are the same. If it is the same the user will be informed that the account was created successfully and return to the main screen. If it is not correct, they will be informed that passwords do not match and the create account function relaunches.
+
+#### Passwords do not match
+![Passwords do not match]()
+
+#### Passwords match
+![Passwords match]()
+
+
 ## Future Features
 
 

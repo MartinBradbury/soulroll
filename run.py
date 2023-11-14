@@ -89,6 +89,7 @@ def create_account():
     else:
         print("username accepted")
     print("Please create a password")
+    print("It will be case sensitive\n")
     password = maskpass.askpass("\nCreate a password: ")
     password_check = maskpass.askpass("\nRe-enter password ")
     if password == password_check:
