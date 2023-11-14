@@ -12,7 +12,40 @@ LichKing is a Python terminal project game. The game is a story driven random nu
 
 ## Table of Contense
 [Rules of the Game](#rules-of-the-game)
-[User Experience](User-Experience)
+[User Experience](#user-experience-ux)
+    [Key Project Goals](#key-project-goals)
+    [User Requirements and expectations](#user-requirements-and-expectations)
+    [User Stories](#user-stories)
+[Features](#features)
+    [Start Screen](#start-screen)
+
+[Furure Features](#future-features)
+
+[Design Features](#design-features)
+    [Design Choice](#design-choices)
+    [Typography](#typography)
+    [Mock Terminal](#mock-terminal)
+[Flow Chart](#flow-chart)
+[Technology](#technology)
+    [Language](#language)
+    [Framework and Tools](#framweorks-and-tools)
+    [Python Libraries and Modules](#python-libraries-and-modules)
+[Testing](#testing)
+    [Code Validation](#code-validation)
+    [PEP8 Validation](#pep8-validation)
+    [Accessibility and Lighthouse](#accessibility-and-lighthouse)
+    [Manual Testing](#manual-testing)
+    [Browser Compatability](#browser-compatability-testing)
+[Bugs](#bugs)
+    [Fixed Bugs](#fixed-bugs)
+        [Username and Password](#username-and-password)
+        [Stored Enter Presses](#stored-enter-presses)
+        [Castle Image](#castle-image)
+    [Known Bugs](#known-bugs)
+        [Storing Keypress](#storing-keypress)
+[Deployment](#deployment)
+    [Heroku](#how-this-site-was-deployed-to-heroku)
+[Credits](#credits)
 
 
 
@@ -146,11 +179,7 @@ colour scheme for accesibility score and value.
 - The app was tested on the following broswers, Chrmose, Edge, Safari.•••••
 - The app worked as intended on all browsers.
 
-### User Story Testing
-
-| | User Story      | Testing|
-|1|Game start| Pass|
-
+## Bugs
 
 ### Fixed Bugs
 
