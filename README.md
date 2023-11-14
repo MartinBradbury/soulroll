@@ -112,12 +112,12 @@ The home screen will display the ASCII art heading 'SoulRoll' along with the opt
 ![Home Screen](images/welcome.png)
 
 ### Login
-If the user selects option one 'login' they will be presented with a screen that asks the user to type in their username and then password. This information is stored on google sheets. When the user types in their username and password a query is sent to google sheets to check if that username and password exists. If a match is found then will progress, if not they will be informed that no match was found and they will be asked to reinput their username and password again. To porvent the user being stuck in an endless loop here, when they are informed that their usernamer and password is incorrect, they will alse be informed that if they type exit as the username and nothing in the password, they will return to the main menu. All password data stored on google sheets is encripted using hashlib which means that no sensitive data is visible on the google sheets. 
+If the user selects option one 'login' they will be presented with a screen that asks the user to type in their username and then password. This information is stored on google sheets. When the user types in their username and password a query is sent to google sheets to check if that username and password exists. If a match is found then will progress to a screen which will inform them how many souls they currently have. This information is retrieved from google sheet data for that username and password. If the login data is not correct, they will be informed that no match was found and they will be asked to reinput their username and password again. To porvent the user being stuck in an endless loop here, when they are informed that their usernamer and password is incorrect, they will alse be informed that if they type exit as the username and nothing in the password, they will return to the main menu. All password data stored on google sheets is encripted using hashlib which means that no sensitive data is visible on the google sheets. 
 
 #### Login image
 ![Login Image](images/unandpw.png)
 
-### Login Success
+#### Login Success
 If the user correctly inputs their username and password they will be presented with login success and then a clear screen which displays how many souls they currently have.
 
 #### Login Success image and souls
@@ -131,7 +131,24 @@ If the user correctly inputs their username and password they will be presented 
 #### Encripted Password data on google sheets
 ![Encripted Password](images/encript.png)
 
+### Create Account
 
+This option allows new users to create an account. Both the username and password undergo validation to ensure it meets the required conditions. 
+
+#### Username
+The username needs to be unique. After submitting a username google sheets is checked to ensure no other username exists that is the same. If a username exits that is the same, they will recieve a message saying that username already exists, please try another. The username also needs to be between 3 and 10 characters. If it does not meet this creteria they will be informed that in needs to fall within this range. Finally the username cannot contain any numbers. If a number is present anywhere in the username they will be informed that it must not contain any numbers. If all validation is passed, they will be informed that the username has been accepted. 
+
+#### Username Creation
+![]()
+
+#### Username Exists
+![]()
+
+#### Username Too long / short
+![]()
+
+#### Username contains numbers
+![]()
 
 ## Future Features
 

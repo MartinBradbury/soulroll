@@ -81,7 +81,8 @@ def create_account():
     print("\nWelcome to account creation.\n")
     print("Please create your username")
     print("It should contain 3-10 characters")
-    print("It should not contain any numbers\n")
+    print("It should not contain any numbers")
+    print("It will be case sensitive\n")
     username = input("Create a username: ")
     if username_check(username) is False:
         create_account()
