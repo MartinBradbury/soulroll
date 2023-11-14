@@ -1,4 +1,5 @@
 # SoulRoll
+![Welcome](/images/welcome.png)
 
 (Developer: Martin Bradbury)
 
