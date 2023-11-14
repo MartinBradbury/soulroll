@@ -154,11 +154,17 @@ The username needs to be unique. After submitting a username google sheets is ch
 The user is then asked to create a password. The password is case sensitive but can contain numbers, letters and any special characters. When the user is typing in their password it is hidden by stars using the maskpass feature. The user is able to see they they are typing characters as they input their password as a star appears for every character inputted. The ensure they user has not made a typing mistake, they have to input the password again to validate they are the same. If it is the same the user will be informed that the account was created successfully and return to the main screen. If it is not correct, they will be informed that passwords do not match and the create account function relaunches.
 
 #### Passwords do not match
-![Passwords do not match]()
+![Passwords do not match](images/nomatch.png)
 
 #### Passwords match
-![Passwords match]()
+![Passwords match](images/passwordinput.png)
 
+
+### Leaderboard
+The leaderboard feature is selected from the home screen. It does not require the user to be logged in. Once slected the user will see a list of username and their current souls. This information pulled from data on google sheets. I used the pandas dataframe feature to display this leaderboard and ordered it with the users having the most souls at the top, down to the least at the bottom. I also selected the specific coulmns i wanted to show on the leaderboard as I did did not want to display the encripted password column no the index number.
+
+#### Leaderboard
+![Leaderboard](images/leaderboard.png)
 
 ## Future Features
 
