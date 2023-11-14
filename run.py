@@ -57,19 +57,10 @@ def banner():
 
 def create_account():
     """
-    This function clears the current terminal and displays the
-    heading 'create account'. It opens the google sheet data
-    'userdata' and asks the user to input a username.
-    A message is printed detailing the requirements of the username.
-    The username is converted to lower case and sent through to
-    username check function. If returned True from username check
-    a message prints to inform the user it is accepted.
-    Users are then asked to create a password and verify the
-    password. The password is hidden when typed using maskpass
-    and encoded. A score of 0 is declared to the new user and
-    the accepted username and encoded password is written
-    to google sheets along with their score of 0.
-    Users are then sent to the welcome function.
+    This function allows the user to create an account. It validates the 
+    username chosen to check that it does not exist and comprises of
+    no numbers and is between 3 and 10 characters. It allows users to create
+    a password which is encoded and stored on google sheets.
     """
 
     system('clear')
@@ -105,16 +96,9 @@ def create_account():
 
 def username_check(username):
     """
-    This function is called from the create account
-    function. It checks the username entered by the user
-    to make sure it is between 3 and 10 characters and contains
-    no numbers. If the username does not meet this creteria
-    a valueerror is raised with a print statement reminding the
-    user of the username requirements. This remains on the screen
-    for 3 seconds before the create account function is called again.
-    If the username is accepted no value error is raised and True
-    is returned sending the user back to the create account function
-    where they will not create a password.
+    This function is used to validate the username created. It checks
+    to see if the username has already been taken and if the username
+    is within 3 to 10 characters and has no numbers. 
     """
     data = SHEET.worksheet('username')
     usr = data.get_all_records()
@@ -142,14 +126,8 @@ def username_check(username):
 
 def user_authentication(input_username, auth_hash):
     """
-    This function take the username input and password input
-    from the main function. It opens google sheet userdata
-    and gets all records. It looks through the records
-    to find a match for the username input and password input.
-    If a match is found the loop is broken and returned to the
-    main function after a pause where the terminal displays
-    logging in and login successful. If no match is found the
-    user is returned to the welcome function.
+    This function recieves the username and password input by the
+    user and checks google sheets to see if there is a match. 
     """
 
     data = SHEET.worksheet('username')
@@ -177,16 +155,10 @@ def user_authentication(input_username, auth_hash):
 
 def leaderboard():
     """
-    This function is selected from the welcome function.
-    It clears the terminal and opens the google sheet userdata.
-    It gets all records from the sheet and stores it as a
-    pandas dataframe. It arranges the data from by the score
-    column in the google sheet from highest to lowers.
-    The heading leaderboard is printed to the terminal. Only the
-    usernames and scores are printed to the terminal from highest
-    to lowers and the index removed. The is a 5 second delay and
-    then a print statment appers under the dataframe informing the
-    user to press enter to continue to the welcome function.
+    This function creates a pandas dataframe from the google sheet
+    data and presents the specific columns, username and souls to 
+    the terminal. It also hides the index and presents the data 
+    with highest score at the top. 
     """
 
     clear()
@@ -203,14 +175,8 @@ def leaderboard():
 
 def soulroll():
     """
-    This function clears the terminal and prints the heading
-    for the game. Below the heading the rules of the game are
-    printed to the terminal. The users are asked to type
-    'roll' to start the game. If roll is typed correctly
-    the game will begin and the random_num function is called.
-    If they do not type roll correctly they are informed what they
-    need to type again and their error, a pause for 3 seconds
-    and then the deathroll function is called again.
+    This function displays the ASCII art and presents the story of 
+    the game. 
     """
     system('clear')
     print(f.renderText('SoulRoll'))
@@ -273,6 +239,10 @@ Are your ready for this challenge?\n
 
 
 def ready_check():
+    """
+    This function validates the users response to allow them to continue
+    with the game or exit to main menu.
+    """
     begin = input("\nType (y) to see the rules or (n) to quit: ").lower()
     if begin == 'n':
         banner()
@@ -283,6 +253,11 @@ def ready_check():
 
 
 def rules():
+    """
+    This function displays the rules of the game to the terminal and
+    validats the users response to continue to the game or exit to 
+    main menu.
+    """
     system('clear')
     print(f.renderText('Rules\n'))
     print("* This is a random dice game of chance.\n")
@@ -308,6 +283,14 @@ def rules():
 
 
 def random_num(new_souls, input_username):
+    """
+    This function uses the random number generation to generate
+    numbers between 2 and 100 for the first roll and then 1 to 
+    whatever the last number rolled was. It will keep generating 
+    a random number until number 1 is rolled. At this point the loop
+    will stop.
+    
+    """
     system('clear')
     roll = input("Please type roll to start: ").lower()
     if roll != "roll":
@@ -358,7 +341,8 @@ def random_num(new_souls, input_username):
 
 def print_letters(text):
     """
-    Print the letters in turn with a 0.05s delay
+    This function allos the terminal print statments to be printed
+    letter at a time with a 0.05s delay.
     """
 
     for letters in text:
@@ -381,11 +365,8 @@ def clear():
 
 def get_current_souls(input_username):
     """
-    This function is called from the main function. It opens
-    the google spreadsheet userdata and checks the username
-    input for the login and prints their current score.
-    There is an input of enter so the user has time to
-    see their current score before moveing on.
+    This function pulls data from the google sheet for a specific user
+    and prints to the terminal how many souls they currently have.
     """
 
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
@@ -405,7 +386,7 @@ def update_souls(input_username, add_souls):
     """
     This function updates the user score after each random_num played.
     It opens the google sheet userdata, finds the correct user and
-    updates their score. It then returns the data update_score.
+    updates their score. 
     """
 
     SHEET = GSPREAD_CLIENT.open('userdata').sheet1
@@ -423,19 +404,10 @@ def update_souls(input_username, add_souls):
 
 def main():
     """
-    This function clears the terminal. It is ran when the user
-    selects login from the welcome function. It prints log in and
-    asks the user to input their username and password. The login
-    function is ran with the data inputed by the user and if true
-    the get_current_score function is ran. The returned value is
-    converted into an int and then the deathrol function is ran.
-    when the deathroll function is complete the randon_num function
-    is ran using the new_score and input_username data. After the
-    random_num has completed the update _score function is ran to
-    update the users score. The user is asked if they want to play
-    again, if yes is selected the game restarts with their new score,
-    if no is selected the welcome function is ran.
-    checks are present to make sure the user selects y or n.
+    This function runs from top down and structures the game. It logs the user 
+    in, validates their details and and gets their current souls from 
+    google sheet data. It runs the game and then asks if the user would 
+    like to replay or quit.
     """
 
     system('clear')
