@@ -31,11 +31,8 @@ SHEET = GSPREAD_CLIENT.open('userdata')
 
 def banner():
     """
-    This function is ran when the terminal loads. It ensures there is a
-    clear terminal and prints the title for the game. It gives
-    the user a list of options to select which have been stored in
-    a dictionary. Once user has selected an option, the will see
-    a print message saying initilising and a 3 second pause.
+    This function displays the game name and provides the user 
+    with 4 options. Each option selection is validated.
     """
     clear()
     print(f.renderText('  Welcome To'))
