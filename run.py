@@ -39,8 +39,8 @@ def banner():
     """
 
     clear()
-    print(f.renderText('       Warcraft'))
-    print(f.renderText('     mini-games'))
+    print(f.renderText('  Welcome To'))
+    print(f.renderText('      SoulRoll'))
     print("Welcome")
     print("[1] Login")
     print("[2] create account")
@@ -204,7 +204,7 @@ def leaderboard():
     banner()
 
 
-def deathroll():
+def soulroll():
     """
     This function clears the terminal and prints the heading
     for the game. Below the heading the rules of the game are
@@ -215,7 +215,9 @@ def deathroll():
     need to type again and their error, a pause for 3 seconds
     and then the deathroll function is called again.
     """
-
+    system('clear')
+    print(f.renderText('SoulRoll'))
+    sleep(2)
     system('clear')
     castle = r"""
 
@@ -296,7 +298,7 @@ def rules():
     print("  rewarded one soul.\n")
     print("* Should you be defeated, you will lose a soul")
     print("  to the Lich King.\n")
-    print("Are you ready to face the Lich King?\n")
+    print("Are you ready to face the Lich King?")
     start_game = input("Type (y) to begin or (n) to quit: ").lower()
     if start_game == 'n':
         banner()
@@ -450,7 +452,7 @@ def main():
     souls = get_current_souls(input_username)
     new_souls = int(souls)
     sleep(1)
-    deathroll()
+    soulroll()
     test_souls = random_num(new_souls, input_username)
     sleep(1)
     add_souls = test_souls
