@@ -181,6 +181,12 @@ The game is designed to be part of a story. The user, 'the champion' is tasked w
 #### Continue to Rules
 ![Contimue to rules](/images/continue.png)
 
+### The Rules
+This section informs the user how they are going to play the game. It details, how the game is won and lost and how the game works. Once users have read the rules they can select y to start the game or n to return back to the main menu. Their selection is validated to eusure either y or n is selected. 
+
+#### The rules
+![The Rules](/images/rules.png)
+
 
 ## Future Features
 
