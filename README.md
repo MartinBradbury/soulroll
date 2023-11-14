@@ -139,16 +139,16 @@ This option allows new users to create an account. Both the username and passwor
 The username needs to be unique. After submitting a username google sheets is checked to ensure no other username exists that is the same. If a username exits that is the same, they will recieve a message saying that username already exists, please try another. The username also needs to be between 3 and 10 characters. If it does not meet this creteria they will be informed that in needs to fall within this range. Finally the username cannot contain any numbers. If a number is present anywhere in the username they will be informed that it must not contain any numbers. If all validation is passed, they will be informed that the username has been accepted. 
 
 #### Username Creation
-![]()
+![Username Creation](images/createaccount.png)
 
 #### Username Exists
-![]()
+![Username Exists](images/unexists.png)
 
 #### Username Too long / short
-![]()
+![Username too long / short](images/tooshort.png)
 
 #### Username contains numbers
-![]()
+![Username contains Numbers](images/containsnum.png)
 
 ## Future Features
 
